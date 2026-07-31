@@ -1,0 +1,77 @@
+{
+  "continent": { "key": "asia", "name": "Asia", "description": "Templos milenarios, megaciudades futuristas y gastronomía que enamora.", "emoji": "⛩️" },
+  "countries": [
+    {
+      "key": "japan", "name": "Japón", "emoji": "🇯🇵",
+      "cities": [
+        {
+          "key": "tokio", "name": "Tokio", "country": "Japón", "continent": "Asia",
+          "description": "Capital ultramoderna donde los rascacielos conviven con templos centenarios.",
+          "budgetPerDay": 100, "recommendedDays": 5, "currency": "JPY", "language": "Japonés",
+          "bestSeason": "Marzo - Mayo, Oct - Nov", "image": "tokio",
+          "attractions": [
+            { "key": "senso-ji", "name": "Templo Senso-ji", "type": "attraction", "description": "El templo budista más antiguo de Tokio.", "price": 0, "rating": 4.7 },
+            { "key": "shibuya-crossing", "name": "Cruce de Shibuya", "type": "attraction", "description": "El cruce peatonal más transitado del mundo.", "price": 0, "rating": 4.5 },
+            { "key": "meiji-shrine", "name": "Santuario Meiji", "type": "attraction", "description": "Santuario sintoísta rodeado de bosque.", "price": 0, "rating": 4.6 }
+          ],
+          "hotels": [
+            { "key": "park-hyatt-tokio", "name": "Park Hyatt Tokyo", "type": "hotel", "description": "Hotel icónico de Lost in Translation.", "pricePerNight": 250, "rating": 4.8, "category": "Lujo" },
+            { "key": "khaosan-tokio", "name": "Khaosan Tokyo", "type": "hotel", "description": "Hostal con habitaciones cápsula.", "pricePerNight": 25, "rating": 4.1, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "sukiyabashi-jiro", "name": "Sukiyabashi Jiro", "type": "restaurant", "description": "El sushi más famoso del mundo.", "pricePerPerson": 60, "rating": 4.9, "cuisine": "Sushi" },
+            { "key": "ichiran-ramen", "name": "Ichiran Ramen", "type": "restaurant", "description": "Ramen con cabinas individuales.", "pricePerPerson": 10, "rating": 4.5, "cuisine": "Ramen" }
+          ]
+        },
+        {
+          "key": "kioto", "name": "Kioto", "country": "Japón", "continent": "Asia",
+          "description": "Antigua capital imperial con más de 2,000 templos y jardines zen.",
+          "budgetPerDay": 80, "recommendedDays": 4, "currency": "JPY", "language": "Japonés",
+          "bestSeason": "Marzo - Mayo, Oct - Nov", "image": "kioto",
+          "attractions": [
+            { "key": "fushimi-inari", "name": "Fushimi Inari", "type": "attraction", "description": "Miles de torii rojos por la montaña.", "price": 0, "rating": 4.8 },
+            { "key": "kinkaku-ji", "name": "Kinkaku-ji", "type": "attraction", "description": "Pabellón de Oro cubierto de pan de oro.", "price": 5, "rating": 4.7 },
+            { "key": "arashiyama", "name": "Bosque de Bambú", "type": "attraction", "description": "Sendero mágico de bambúes gigantes.", "price": 0, "rating": 4.6 }
+          ],
+          "hotels": [
+            { "key": "hotel-granvia-kioto", "name": "Hotel Granvia Kyoto", "type": "hotel", "description": "Hotel de lujo en la estación de Kioto.", "pricePerNight": 140, "rating": 4.5, "category": "Lujo" },
+            { "key": "piece-hostel-kioto", "name": "Piece Hostel Kyoto", "type": "hotel", "description": "Hostal de diseño con jardín japonés.", "pricePerNight": 30, "rating": 4.3, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "nishiki-market", "name": "Nishiki Market", "type": "restaurant", "description": "Más de 100 puestos de comida tradicional.", "pricePerPerson": 12, "rating": 4.6, "cuisine": "Mercado" },
+            { "key": "gion-kappa", "name": "Gion Kappa", "type": "restaurant", "description": "Kaiseki en Gion con ceremonia del té.", "pricePerPerson": 40, "rating": 4.7, "cuisine": "Kaiseki" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "thailand", "name": "Tailandia", "emoji": "🇹🇭",
+      "cities": [
+        {
+          "key": "bangkok", "name": "Bangkok", "country": "Tailandia", "continent": "Asia",
+          "description": "Metrópolis fascinante con templos dorados y street food incomparable.",
+          "budgetPerDay": 40, "recommendedDays": 3, "currency": "THB", "language": "Tailandés",
+          "bestSeason": "Noviembre - Febrero", "image": "bangkok",
+          "attractions": [
+            { "key": "grand-palace", "name": "Gran Palacio", "type": "attraction", "description": "Residencia real con el Buda Esmeralda.", "price": 15, "rating": 4.7 },
+            { "key": "wat-arun", "name": "Wat Arun", "type": "attraction", "description": "Templo del Amanecer junto al Chao Phraya.", "price": 3, "rating": 4.6 },
+            { "key": "chatuchak", "name": "Mercado Chatuchak", "type": "attraction", "description": "Más de 15,000 puestos al aire libre.", "price": 0, "rating": 4.4 }
+          ],
+          "hotels": [
+            { "key": "mandarin-oriental-bkk", "name": "Mandarin Oriental", "type": "hotel", "description": "Hotel legendario junto al río.", "pricePerNight": 180, "rating": 4.9, "category": "Lujo" },
+            { "key": "lub-d-silom", "name": "Lub d Silom", "type": "hotel", "description": "Hostal moderno con bar en azotea.", "pricePerNight": 15, "rating": 4.2, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "jay-fai", "name": "Jay Fai", "type": "restaurant", "description": "Street food con estrella Michelin.", "pricePerPerson": 25, "rating": 4.8, "cuisine": "Street Food" },
+            { "key": "thip-samai", "name": "Thip Samai", "type": "restaurant", "description": "El mejor pad thai de Bangkok.", "pricePerPerson": 3, "rating": 4.5, "cuisine": "Tailandesa" }
+          ]
+        }
+      ]
+    }
+  ],
+  "connections": [
+    { "from": "tokio", "to": "kioto", "distance": 476, "cost": 120 },
+    { "from": "tokio", "to": "bangkok", "distance": 4600, "cost": 250 },
+    { "from": "kioto", "to": "bangkok", "distance": 4300, "cost": 230 }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "continent": { "key": "americas", "name": "América", "description": "Desde Iguazú hasta Nueva York, paisajes extremos y culturas vibrantes.", "emoji": "🗽" },
+  "countries": [
+    {
+      "key": "mexico", "name": "México", "emoji": "🇲🇽",
+      "cities": [
+        {
+          "key": "cdmx", "name": "Ciudad de México", "country": "México", "continent": "América",
+          "description": "Megalópolis con historia azteca, murales de Rivera y tacos al pastor.",
+          "budgetPerDay": 45, "recommendedDays": 4, "currency": "MXN", "language": "Español",
+          "bestSeason": "Marzo - Mayo, Oct - Nov", "image": "cdmx",
+          "attractions": [
+            { "key": "templo-mayor", "name": "Templo Mayor", "type": "attraction", "description": "Ruinas del templo azteca principal.", "price": 5, "rating": 4.6 },
+            { "key": "palacio-bellas-artes", "name": "Palacio de Bellas Artes", "type": "attraction", "description": "Art nouveau con murales de Rivera y Orozco.", "price": 4, "rating": 4.8 },
+            { "key": "chapultepec", "name": "Bosque de Chapultepec", "type": "attraction", "description": "El parque urbano más grande de LATAM.", "price": 0, "rating": 4.5 }
+          ],
+          "hotels": [
+            { "key": "four-seasons-cdmx", "name": "Four Seasons CDMX", "type": "hotel", "description": "Lujo en Paseo de la Reforma.", "pricePerNight": 160, "rating": 4.8, "category": "Lujo" },
+            { "key": "hostel-mundo-joven", "name": "Mundo Joven Catedral", "type": "hotel", "description": "Terraza con vista al Zócalo.", "pricePerNight": 15, "rating": 4.0, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "pujol", "name": "Pujol", "type": "restaurant", "description": "Enrique Olvera, entre los mejores del mundo.", "pricePerPerson": 50, "rating": 4.9, "cuisine": "Mexicana contemporánea" },
+            { "key": "tacos-el-califa", "name": "Tacos El Califa de León", "type": "restaurant", "description": "Taquería con estrella Michelin.", "pricePerPerson": 5, "rating": 4.7, "cuisine": "Tacos" }
+          ]
+        },
+        {
+          "key": "cancun", "name": "Cancún", "country": "México", "continent": "América",
+          "description": "Paraíso caribeño con ruinas mayas y cenotes cristalinos.",
+          "budgetPerDay": 70, "recommendedDays": 3, "currency": "MXN", "language": "Español",
+          "bestSeason": "Diciembre - Abril", "image": "cancun",
+          "attractions": [
+            { "key": "chichen-itza", "name": "Chichén Itzá", "type": "attraction", "description": "Maravilla del Mundo. Pirámide de Kukulcán.", "price": 25, "rating": 4.8 },
+            { "key": "isla-mujeres", "name": "Isla Mujeres", "type": "attraction", "description": "Isla paradisíaca a 20 min en ferry.", "price": 15, "rating": 4.6 },
+            { "key": "cenote-ik-kil", "name": "Cenote Ik Kil", "type": "attraction", "description": "Cenote sagrado maya rodeado de lianas.", "price": 10, "rating": 4.7 }
+          ],
+          "hotels": [
+            { "key": "hyatt-cancun", "name": "Hyatt Zilara Cancún", "type": "hotel", "description": "Resort all-inclusive.", "pricePerNight": 200, "rating": 4.7, "category": "Lujo" },
+            { "key": "hostel-quetzal", "name": "Hostel Quetzal", "type": "hotel", "description": "Hostal con piscina en el centro.", "pricePerNight": 18, "rating": 4.0, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "puerto-madero-cancun", "name": "Puerto Madero", "type": "restaurant", "description": "Cortes y mariscos frente a la laguna.", "pricePerPerson": 35, "rating": 4.5, "cuisine": "Mariscos" },
+            { "key": "tacos-rigo", "name": "Tacos Rigo", "type": "restaurant", "description": "Al pastor a precio local.", "pricePerPerson": 5, "rating": 4.3, "cuisine": "Mexicana" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "colombia", "name": "Colombia", "emoji": "🇨🇴",
+      "cities": [
+        {
+          "key": "bogota", "name": "Bogotá", "country": "Colombia", "continent": "América",
+          "description": "Capital a 2,640m con arte callejero y escena gastronómica en auge.",
+          "budgetPerDay": 35, "recommendedDays": 3, "currency": "COP", "language": "Español",
+          "bestSeason": "Dic - Marzo, Jul - Ago", "image": "bogota",
+          "attractions": [
+            { "key": "monserrate", "name": "Cerro de Monserrate", "type": "attraction", "description": "Mirador a 3,152m con vista panorámica.", "price": 8, "rating": 4.6 },
+            { "key": "museo-oro", "name": "Museo del Oro", "type": "attraction", "description": "Mayor colección de orfebrería prehispánica.", "price": 2, "rating": 4.7 },
+            { "key": "candelaria", "name": "La Candelaria", "type": "attraction", "description": "Centro histórico con grafitis y colonial.", "price": 0, "rating": 4.4 }
+          ],
+          "hotels": [
+            { "key": "four-seasons-bogota", "name": "Four Seasons Bogotá", "type": "hotel", "description": "Lujo en la Zona Rosa.", "pricePerNight": 130, "rating": 4.7, "category": "Lujo" },
+            { "key": "masaya-bogota", "name": "Masaya Hostel", "type": "hotel", "description": "Hostal con terraza en La Candelaria.", "pricePerNight": 12, "rating": 4.2, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "leo-cocina", "name": "Leo Cocina y Cava", "type": "restaurant", "description": "Alta cocina colombiana premiada.", "pricePerPerson": 40, "rating": 4.8, "cuisine": "Colombiana" },
+            { "key": "andres-carne-res", "name": "Andrés Carne de Res", "type": "restaurant", "description": "Restaurante-fiesta con carne a la brasa.", "pricePerPerson": 15, "rating": 4.5, "cuisine": "Parrilla" }
+          ]
+        }
+      ]
+    }
+  ],
+  "connections": [
+    { "from": "cdmx", "to": "cancun", "distance": 1620, "cost": 80 },
+    { "from": "cdmx", "to": "bogota", "distance": 3660, "cost": 180 },
+    { "from": "cancun", "to": "bogota", "distance": 2370, "cost": 150 }
+  ]
+}

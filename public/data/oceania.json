@@ -1,0 +1,52 @@
+{
+  "continent": { "key": "oceania", "name": "Oceanía", "description": "Playas infinitas, arrecifes de coral y ciudades cosmopolitas.", "emoji": "🏝️" },
+  "countries": [
+    {
+      "key": "australia", "name": "Australia", "emoji": "🇦🇺",
+      "cities": [{
+        "key": "sydney", "name": "Sídney", "country": "Australia", "continent": "Oceanía",
+        "description": "Puerto icónico con la Ópera, playas de surf y escena multicultural.",
+        "budgetPerDay": 110, "recommendedDays": 4, "currency": "AUD", "language": "Inglés",
+        "bestSeason": "Sept - Nov, Marzo - Mayo", "image": "sydney",
+        "attractions": [
+          { "key": "opera-house", "name": "Sydney Opera House", "type": "attraction", "description": "Patrimonio de la Humanidad.", "price": 30, "rating": 4.8 },
+          { "key": "bondi-beach", "name": "Bondi Beach", "type": "attraction", "description": "La playa más famosa de Australia.", "price": 0, "rating": 4.5 },
+          { "key": "harbour-bridge", "name": "Harbour Bridge Climb", "type": "attraction", "description": "Escalar el arco del puente.", "price": 175, "rating": 4.7 }
+        ],
+        "hotels": [
+          { "key": "park-hyatt-sydney", "name": "Park Hyatt Sydney", "type": "hotel", "description": "Vista de la Ópera y el Harbour Bridge.", "pricePerNight": 280, "rating": 4.9, "category": "Lujo" },
+          { "key": "wake-up-sydney", "name": "Wake Up! Sydney", "type": "hotel", "description": "Hostal moderno en Central Station.", "pricePerNight": 28, "rating": 4.1, "category": "Económico" }
+        ],
+        "restaurants": [
+          { "key": "quay-restaurant", "name": "Quay Restaurant", "type": "restaurant", "description": "Cocina australiana de autor.", "pricePerPerson": 65, "rating": 4.8, "cuisine": "Australiana" },
+          { "key": "mamak-sydney", "name": "Mamak", "type": "restaurant", "description": "Cocina malaya adictiva en Chinatown.", "pricePerPerson": 12, "rating": 4.4, "cuisine": "Malaya" }
+        ]
+      }]
+    },
+    {
+      "key": "new-zealand", "name": "Nueva Zelanda", "emoji": "🇳🇿",
+      "cities": [{
+        "key": "queenstown", "name": "Queenstown", "country": "Nueva Zelanda", "continent": "Oceanía",
+        "description": "Capital mundial de la aventura. Bungee, esquí y paisajes de LOTR.",
+        "budgetPerDay": 95, "recommendedDays": 3, "currency": "NZD", "language": "Inglés",
+        "bestSeason": "Dic - Feb (verano), Jun - Ago (esquí)", "image": "queenstown",
+        "attractions": [
+          { "key": "milford-sound", "name": "Milford Sound", "type": "attraction", "description": "Fiordo con cascadas y delfines.", "price": 80, "rating": 4.9 },
+          { "key": "bungee-kawarau", "name": "Kawarau Bungee", "type": "attraction", "description": "Donde nació el bungee jumping.", "price": 150, "rating": 4.6 },
+          { "key": "skyline-gondola", "name": "Skyline Gondola", "type": "attraction", "description": "Teleférico con vistas al lago.", "price": 44, "rating": 4.5 }
+        ],
+        "hotels": [
+          { "key": "eichardts-qtw", "name": "Eichardt's Private Hotel", "type": "hotel", "description": "Boutique de lujo a orillas del lago.", "pricePerNight": 350, "rating": 4.9, "category": "Lujo" },
+          { "key": "adventure-qtw", "name": "Adventure Queenstown", "type": "hotel", "description": "Hostal para aventureros con sauna.", "pricePerNight": 30, "rating": 4.2, "category": "Económico" }
+        ],
+        "restaurants": [
+          { "key": "botswana-butchery", "name": "Botswana Butchery", "type": "restaurant", "description": "Cortes premium con vista al lago.", "pricePerPerson": 50, "rating": 4.7, "cuisine": "Parrilla" },
+          { "key": "fergburger", "name": "Fergburger", "type": "restaurant", "description": "Las hamburguesas más famosas de NZ.", "pricePerPerson": 12, "rating": 4.5, "cuisine": "Hamburguesas" }
+        ]
+      }]
+    }
+  ],
+  "connections": [
+    { "from": "sydney", "to": "queenstown", "distance": 1920, "cost": 160 }
+  ]
+}

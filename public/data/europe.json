@@ -1,0 +1,125 @@
+{
+  "continent": { "key": "europe", "name": "Europa", "description": "Desde las costas del Mediterráneo hasta los fiordos nórdicos, Europa ofrece siglos de historia, arte y gastronomía.", "emoji": "🏰" },
+  "countries": [
+    {
+      "key": "spain", "name": "España", "emoji": "🇪🇸",
+      "cities": [
+        {
+          "key": "barcelona", "name": "Barcelona", "country": "España", "continent": "Europa",
+          "description": "Ciudad costera que fusiona la arquitectura modernista de Gaudí con playas mediterráneas y vida nocturna vibrante.",
+          "budgetPerDay": 85, "recommendedDays": 4, "currency": "EUR", "language": "Español / Catalán",
+          "bestSeason": "Abril - Junio, Sept - Oct", "image": "barcelona",
+          "attractions": [
+            { "key": "sagrada-familia", "name": "Sagrada Familia", "type": "attraction", "description": "Obra maestra inacabada de Antoni Gaudí. Más de 140 años en construcción.", "price": 26, "rating": 4.8 },
+            { "key": "park-guell", "name": "Park Güell", "type": "attraction", "description": "Parque público con mosaicos coloridos y vistas panorámicas de Gaudí.", "price": 10, "rating": 4.5 },
+            { "key": "la-rambla", "name": "La Rambla", "type": "attraction", "description": "Bulevar de 1.2 km con artistas callejeros y el Mercado de la Boquería.", "price": 0, "rating": 4.2 }
+          ],
+          "hotels": [
+            { "key": "hotel-arts-bcn", "name": "Hotel Arts Barcelona", "type": "hotel", "description": "Hotel de lujo frente al mar Mediterráneo.", "pricePerNight": 150, "rating": 4.7, "category": "Lujo" },
+            { "key": "generator-bcn", "name": "Generator Barcelona", "type": "hotel", "description": "Hostal moderno en Gràcia con terraza en la azotea.", "pricePerNight": 35, "rating": 4.3, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "can-roca", "name": "El Celler de Can Roca", "type": "restaurant", "description": "Tres estrellas Michelin. Cocina catalana de vanguardia.", "pricePerPerson": 45, "rating": 4.9, "cuisine": "Catalana" },
+            { "key": "bar-canete", "name": "Bar Cañete", "type": "restaurant", "description": "Tapas creativas en ambiente animado.", "pricePerPerson": 20, "rating": 4.5, "cuisine": "Tapas" }
+          ]
+        },
+        {
+          "key": "madrid", "name": "Madrid", "country": "España", "continent": "Europa",
+          "description": "La capital combina museos de talla mundial, vida nocturna inagotable y pasión por la gastronomía.",
+          "budgetPerDay": 75, "recommendedDays": 3, "currency": "EUR", "language": "Español",
+          "bestSeason": "Marzo - Mayo, Sept - Nov", "image": "madrid",
+          "attractions": [
+            { "key": "museo-prado", "name": "Museo del Prado", "type": "attraction", "description": "Obras de Velázquez, Goya y El Bosco.", "price": 15, "rating": 4.8 },
+            { "key": "retiro", "name": "Parque del Retiro", "type": "attraction", "description": "Oasis verde con el Palacio de Cristal y lago.", "price": 0, "rating": 4.6 },
+            { "key": "palacio-real", "name": "Palacio Real", "type": "attraction", "description": "El palacio real más grande de Europa occidental.", "price": 12, "rating": 4.7 }
+          ],
+          "hotels": [
+            { "key": "hotel-ritz-mad", "name": "Hotel Ritz Madrid", "type": "hotel", "description": "Hotel histórico de lujo junto al Paseo del Prado.", "pricePerNight": 200, "rating": 4.8, "category": "Lujo" },
+            { "key": "toc-hostel-mad", "name": "TOC Hostel Madrid", "type": "hotel", "description": "Hostal boutique en pleno centro.", "pricePerNight": 28, "rating": 4.2, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "sobrino-botin", "name": "Sobrino de Botín", "type": "restaurant", "description": "El restaurante más antiguo del mundo (1725).", "pricePerPerson": 35, "rating": 4.6, "cuisine": "Castellana" },
+            { "key": "mercado-san-miguel", "name": "Mercado de San Miguel", "type": "restaurant", "description": "Mercado gastronómico con tapas y mariscos.", "pricePerPerson": 18, "rating": 4.4, "cuisine": "Mercado" }
+          ]
+        },
+        {
+          "key": "sevilla", "name": "Sevilla", "country": "España", "continent": "Europa",
+          "description": "Cuna del flamenco, catedral gótica imponente y cultura andaluza vibrante.",
+          "budgetPerDay": 65, "recommendedDays": 3, "currency": "EUR", "language": "Español",
+          "bestSeason": "Marzo - Mayo, Oct - Nov", "image": "sevilla",
+          "attractions": [
+            { "key": "plaza-espana-sev", "name": "Plaza de España", "type": "attraction", "description": "Plaza monumental con canales y arquitectura renacentista.", "price": 0, "rating": 4.8 },
+            { "key": "real-alcazar", "name": "Real Alcázar", "type": "attraction", "description": "Palacio real mudéjar con jardines exuberantes.", "price": 14, "rating": 4.7 },
+            { "key": "catedral-sevilla", "name": "Catedral de Sevilla", "type": "attraction", "description": "La catedral gótica más grande del mundo.", "price": 10, "rating": 4.6 }
+          ],
+          "hotels": [
+            { "key": "hotel-alfonso-xiii", "name": "Hotel Alfonso XIII", "type": "hotel", "description": "Hotel emblemático mudéjar junto al Real Alcázar.", "pricePerNight": 120, "rating": 4.7, "category": "Lujo" },
+            { "key": "oasis-backpackers", "name": "Oasis Backpackers", "type": "hotel", "description": "Hostal con piscina en azotea.", "pricePerNight": 22, "rating": 4.1, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "abades-triana", "name": "Abades Triana", "type": "restaurant", "description": "Cocina andaluza junto al Guadalquivir.", "pricePerPerson": 30, "rating": 4.5, "cuisine": "Andaluza" },
+            { "key": "la-brunilda", "name": "La Brunilda", "type": "restaurant", "description": "Tapas de autor. Siempre con cola.", "pricePerPerson": 15, "rating": 4.6, "cuisine": "Tapas" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "france", "name": "Francia", "emoji": "🇫🇷",
+      "cities": [
+        {
+          "key": "paris", "name": "París", "country": "Francia", "continent": "Europa",
+          "description": "La Ciudad de la Luz. Moda, gastronomía, arte y romanticismo.",
+          "budgetPerDay": 110, "recommendedDays": 5, "currency": "EUR", "language": "Francés",
+          "bestSeason": "Abril - Junio, Sept - Oct", "image": "paris",
+          "attractions": [
+            { "key": "torre-eiffel", "name": "Torre Eiffel", "type": "attraction", "description": "El monumento más icónico de París.", "price": 26, "rating": 4.7 },
+            { "key": "louvre", "name": "Museo del Louvre", "type": "attraction", "description": "Hogar de la Mona Lisa y la Venus de Milo.", "price": 17, "rating": 4.8 },
+            { "key": "montmartre", "name": "Montmartre", "type": "attraction", "description": "Barrio bohemio con el Sacré-Cœur.", "price": 0, "rating": 4.5 }
+          ],
+          "hotels": [
+            { "key": "le-marais-hotel", "name": "Hôtel Le Marais", "type": "hotel", "description": "Hotel boutique en Le Marais.", "pricePerNight": 160, "rating": 4.5, "category": "Boutique" },
+            { "key": "generator-paris", "name": "Generator Paris", "type": "hotel", "description": "Hostal de diseño junto al Canal Saint-Martin.", "pricePerNight": 40, "rating": 4.2, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "le-comptoir", "name": "Le Comptoir du Panthéon", "type": "restaurant", "description": "Bistró parisino clásico.", "pricePerPerson": 28, "rating": 4.4, "cuisine": "Francesa" },
+            { "key": "breizh-cafe", "name": "Breizh Café", "type": "restaurant", "description": "Crêpes bretonas gourmet en el Marais.", "pricePerPerson": 15, "rating": 4.5, "cuisine": "Crêperie" }
+          ]
+        }
+      ]
+    },
+    {
+      "key": "italy", "name": "Italia", "emoji": "🇮🇹",
+      "cities": [
+        {
+          "key": "roma", "name": "Roma", "country": "Italia", "continent": "Europa",
+          "description": "La Ciudad Eterna. Dos mil años de historia con la mejor pasta del mundo.",
+          "budgetPerDay": 90, "recommendedDays": 4, "currency": "EUR", "language": "Italiano",
+          "bestSeason": "Abril - Junio, Sept - Oct", "image": "roma",
+          "attractions": [
+            { "key": "coliseo", "name": "Coliseo Romano", "type": "attraction", "description": "El anfiteatro más grande jamás construido.", "price": 16, "rating": 4.8 },
+            { "key": "vaticano", "name": "Museos Vaticanos", "type": "attraction", "description": "Capilla Sixtina con frescos de Miguel Ángel.", "price": 17, "rating": 4.7 },
+            { "key": "fontana-trevi", "name": "Fontana di Trevi", "type": "attraction", "description": "La fuente más famosa del mundo.", "price": 0, "rating": 4.6 }
+          ],
+          "hotels": [
+            { "key": "hotel-de-russie", "name": "Hotel de Russie", "type": "hotel", "description": "Hotel de lujo entre plazas históricas.", "pricePerNight": 180, "rating": 4.8, "category": "Lujo" },
+            { "key": "the-yellow-roma", "name": "The Yellow Hostel", "type": "hotel", "description": "Hostal vibrante cerca de Termini.", "pricePerNight": 30, "rating": 4.0, "category": "Económico" }
+          ],
+          "restaurants": [
+            { "key": "da-enzo", "name": "Da Enzo al 29", "type": "restaurant", "description": "Trattoria en Trastevere. Carbonara legendaria.", "pricePerPerson": 18, "rating": 4.7, "cuisine": "Italiana" },
+            { "key": "pizzarium", "name": "Pizzarium Bonci", "type": "restaurant", "description": "La mejor pizza al taglio de Roma.", "pricePerPerson": 8, "rating": 4.6, "cuisine": "Pizza" }
+          ]
+        }
+      ]
+    }
+  ],
+  "connections": [
+    { "from": "barcelona", "to": "madrid", "distance": 620, "cost": 45 },
+    { "from": "barcelona", "to": "sevilla", "distance": 1000, "cost": 65 },
+    { "from": "madrid", "to": "sevilla", "distance": 530, "cost": 38 },
+    { "from": "barcelona", "to": "paris", "distance": 1035, "cost": 80 },
+    { "from": "madrid", "to": "paris", "distance": 1275, "cost": 90 },
+    { "from": "paris", "to": "roma", "distance": 1430, "cost": 95 },
+    { "from": "barcelona", "to": "roma", "distance": 1365, "cost": 85 },
+    { "from": "madrid", "to": "roma", "distance": 1950, "cost": 100 }
+  ]
+}

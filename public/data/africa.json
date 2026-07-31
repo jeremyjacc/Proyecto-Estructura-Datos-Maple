@@ -1,0 +1,52 @@
+{
+  "continent": { "key": "africa", "name": "África", "description": "Safaris, desiertos, ciudades vibrantes y riqueza cultural.", "emoji": "🌍" },
+  "countries": [
+    {
+      "key": "morocco", "name": "Marruecos", "emoji": "🇲🇦",
+      "cities": [{
+        "key": "marrakech", "name": "Marrakech", "country": "Marruecos", "continent": "África",
+        "description": "Ciudad imperial con zocos laberínticos y la icónica Jemaa el-Fna.",
+        "budgetPerDay": 40, "recommendedDays": 3, "currency": "MAD", "language": "Árabe / Francés",
+        "bestSeason": "Marzo - Mayo, Sept - Nov", "image": "marrakech",
+        "attractions": [
+          { "key": "jemaa-el-fna", "name": "Plaza Jemaa el-Fna", "type": "attraction", "description": "La plaza más animada de África.", "price": 0, "rating": 4.5 },
+          { "key": "bahia-palace", "name": "Palacio de la Bahía", "type": "attraction", "description": "Palacio del siglo XIX con mosaicos zellige.", "price": 7, "rating": 4.6 },
+          { "key": "jardin-majorelle", "name": "Jardín Majorelle", "type": "attraction", "description": "Jardín botánico de Yves Saint Laurent.", "price": 10, "rating": 4.7 }
+        ],
+        "hotels": [
+          { "key": "la-mamounia", "name": "La Mamounia", "type": "hotel", "description": "Hotel palacio legendario.", "pricePerNight": 200, "rating": 4.9, "category": "Lujo" },
+          { "key": "riad-yasmine", "name": "Riad Yasmine", "type": "hotel", "description": "Riad boutique con piscina interior.", "pricePerNight": 45, "rating": 4.4, "category": "Boutique" }
+        ],
+        "restaurants": [
+          { "key": "nomad-marrakech", "name": "NOMAD", "type": "restaurant", "description": "Cocina marroquí moderna con terraza.", "pricePerPerson": 15, "rating": 4.5, "cuisine": "Marroquí" },
+          { "key": "cafe-des-epices", "name": "Café des Épices", "type": "restaurant", "description": "Tajines y jugos frescos en azotea.", "pricePerPerson": 8, "rating": 4.3, "cuisine": "Café" }
+        ]
+      }]
+    },
+    {
+      "key": "south-africa", "name": "Sudáfrica", "emoji": "🇿🇦",
+      "cities": [{
+        "key": "cape-town", "name": "Ciudad del Cabo", "country": "Sudáfrica", "continent": "África",
+        "description": "Donde la montaña se encuentra con el océano. Viñedos y pingüinos.",
+        "budgetPerDay": 55, "recommendedDays": 4, "currency": "ZAR", "language": "Inglés / Afrikáans",
+        "bestSeason": "Noviembre - Marzo", "image": "cape_town",
+        "attractions": [
+          { "key": "table-mountain", "name": "Table Mountain", "type": "attraction", "description": "Teleférico con vistas 360°.", "price": 18, "rating": 4.8 },
+          { "key": "robben-island", "name": "Robben Island", "type": "attraction", "description": "Prisión de Mandela. Patrimonio UNESCO.", "price": 25, "rating": 4.6 },
+          { "key": "boulders-beach", "name": "Boulders Beach", "type": "attraction", "description": "Colonia de pingüinos africanos.", "price": 8, "rating": 4.5 }
+        ],
+        "hotels": [
+          { "key": "belmond-mount-nelson", "name": "Belmond Mount Nelson", "type": "hotel", "description": "Hotel histórico rosa.", "pricePerNight": 175, "rating": 4.7, "category": "Lujo" },
+          { "key": "once-cape-town", "name": "Once in Cape Town", "type": "hotel", "description": "Hostal boutique con piscina.", "pricePerNight": 20, "rating": 4.3, "category": "Económico" }
+        ],
+        "restaurants": [
+          { "key": "test-kitchen", "name": "The Test Kitchen", "type": "restaurant", "description": "Cocina sudafricana contemporánea.", "pricePerPerson": 45, "rating": 4.8, "cuisine": "Contemporánea" },
+          { "key": "mzansi", "name": "Mzansi Restaurant", "type": "restaurant", "description": "Bobotie, biltong y potjiekos.", "pricePerPerson": 12, "rating": 4.4, "cuisine": "Sudafricana" }
+        ]
+      }]
+    }
+  ],
+  "connections": [
+    { "from": "marrakech", "to": "cape-town", "distance": 8900, "cost": 350 }
+  ]
+}
