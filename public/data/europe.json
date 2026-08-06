@@ -1,5 +1,5 @@
 {
-  "continent": { "key": "europe", "name": "Europa", "description": "Desde las costas del Mediterráneo hasta los fiordos nórdicos, Europa ofrece siglos de historia, arte y gastronomía.", "emoji": "🏰" },
+  "continent": { "key": "europe", "name": "Europa", "description": "Desde las costas del Mediterráneo hasta los fiordos nórdicos, Europa ofrece siglos de historia, arte y gastronomía.", "emoji": "🏰", "image": "roma" },
   "countries": [
     {
       "key": "spain", "name": "España", "emoji": "🇪🇸",
@@ -9,6 +9,9 @@
           "description": "Ciudad costera que fusiona la arquitectura modernista de Gaudí con playas mediterráneas y vida nocturna vibrante.",
           "budgetPerDay": 85, "recommendedDays": 4, "currency": "EUR", "language": "Español / Catalán",
           "bestSeason": "Abril - Junio, Sept - Oct", "image": "barcelona",
+          "climate": "Mediterráneo", "gastronomy": "Tapas, paella, crema catalana",
+          "landmarks": ["Sagrada Familia", "Park Güell", "La Rambla"],
+          "popularity": 95,
           "attractions": [
             { "key": "sagrada-familia", "name": "Sagrada Familia", "type": "attraction", "description": "Obra maestra inacabada de Antoni Gaudí. Más de 140 años en construcción.", "price": 26, "rating": 4.8 },
             { "key": "park-guell", "name": "Park Güell", "type": "attraction", "description": "Parque público con mosaicos coloridos y vistas panorámicas de Gaudí.", "price": 10, "rating": 4.5 },
@@ -28,6 +31,9 @@
           "description": "La capital combina museos de talla mundial, vida nocturna inagotable y pasión por la gastronomía.",
           "budgetPerDay": 75, "recommendedDays": 3, "currency": "EUR", "language": "Español",
           "bestSeason": "Marzo - Mayo, Sept - Nov", "image": "madrid",
+          "climate": "Continental mediterráneo", "gastronomy": "Cocido madrileño, bocadillo de calamares, churros con chocolate",
+          "landmarks": ["Museo del Prado", "Parque del Retiro", "Palacio Real"],
+          "popularity": 88,
           "attractions": [
             { "key": "museo-prado", "name": "Museo del Prado", "type": "attraction", "description": "Obras de Velázquez, Goya y El Bosco.", "price": 15, "rating": 4.8 },
             { "key": "retiro", "name": "Parque del Retiro", "type": "attraction", "description": "Oasis verde con el Palacio de Cristal y lago.", "price": 0, "rating": 4.6 },
@@ -47,6 +53,9 @@
           "description": "Cuna del flamenco, catedral gótica imponente y cultura andaluza vibrante.",
           "budgetPerDay": 65, "recommendedDays": 3, "currency": "EUR", "language": "Español",
           "bestSeason": "Marzo - Mayo, Oct - Nov", "image": "sevilla",
+          "climate": "Mediterráneo cálido", "gastronomy": "Gazpacho, salmorejo, pescaíto frito",
+          "landmarks": ["Plaza de España", "Real Alcázar", "Catedral de Sevilla"],
+          "popularity": 82,
           "attractions": [
             { "key": "plaza-espana-sev", "name": "Plaza de España", "type": "attraction", "description": "Plaza monumental con canales y arquitectura renacentista.", "price": 0, "rating": 4.8 },
             { "key": "real-alcazar", "name": "Real Alcázar", "type": "attraction", "description": "Palacio real mudéjar con jardines exuberantes.", "price": 14, "rating": 4.7 },
@@ -71,6 +80,9 @@
           "description": "La Ciudad de la Luz. Moda, gastronomía, arte y romanticismo.",
           "budgetPerDay": 110, "recommendedDays": 5, "currency": "EUR", "language": "Francés",
           "bestSeason": "Abril - Junio, Sept - Oct", "image": "paris",
+          "climate": "Oceánico templado", "gastronomy": "Croissants, quiche lorraine, crème brûlée",
+          "landmarks": ["Torre Eiffel", "Museo del Louvre", "Montmartre"],
+          "popularity": 98,
           "attractions": [
             { "key": "torre-eiffel", "name": "Torre Eiffel", "type": "attraction", "description": "El monumento más icónico de París.", "price": 26, "rating": 4.7 },
             { "key": "louvre", "name": "Museo del Louvre", "type": "attraction", "description": "Hogar de la Mona Lisa y la Venus de Milo.", "price": 17, "rating": 4.8 },
@@ -95,6 +107,9 @@
           "description": "La Ciudad Eterna. Dos mil años de historia con la mejor pasta del mundo.",
           "budgetPerDay": 90, "recommendedDays": 4, "currency": "EUR", "language": "Italiano",
           "bestSeason": "Abril - Junio, Sept - Oct", "image": "roma",
+          "climate": "Mediterráneo", "gastronomy": "Pasta carbonara, pizza al taglio, tiramisú",
+          "landmarks": ["Coliseo Romano", "Museos Vaticanos", "Fontana di Trevi"],
+          "popularity": 96,
           "attractions": [
             { "key": "coliseo", "name": "Coliseo Romano", "type": "attraction", "description": "El anfiteatro más grande jamás construido.", "price": 16, "rating": 4.8 },
             { "key": "vaticano", "name": "Museos Vaticanos", "type": "attraction", "description": "Capilla Sixtina con frescos de Miguel Ángel.", "price": 17, "rating": 4.7 },

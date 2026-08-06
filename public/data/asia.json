@@ -1,5 +1,5 @@
 {
-  "continent": { "key": "asia", "name": "Asia", "description": "Templos milenarios, megaciudades futuristas y gastronomía que enamora.", "emoji": "⛩️" },
+  "continent": { "key": "asia", "name": "Asia", "description": "Templos milenarios, megaciudades futuristas y gastronomía que enamora.", "emoji": "⛩️", "image": "tokio" },
   "countries": [
     {
       "key": "japan", "name": "Japón", "emoji": "🇯🇵",
@@ -9,6 +9,9 @@
           "description": "Capital ultramoderna donde los rascacielos conviven con templos centenarios.",
           "budgetPerDay": 100, "recommendedDays": 5, "currency": "JPY", "language": "Japonés",
           "bestSeason": "Marzo - Mayo, Oct - Nov", "image": "tokio",
+          "climate": "Subtropical húmedo", "gastronomy": "Sushi, ramen, tempura, matcha",
+          "landmarks": ["Templo Senso-ji", "Cruce de Shibuya", "Santuario Meiji"],
+          "popularity": 94,
           "attractions": [
             { "key": "senso-ji", "name": "Templo Senso-ji", "type": "attraction", "description": "El templo budista más antiguo de Tokio.", "price": 0, "rating": 4.7 },
             { "key": "shibuya-crossing", "name": "Cruce de Shibuya", "type": "attraction", "description": "El cruce peatonal más transitado del mundo.", "price": 0, "rating": 4.5 },
@@ -28,6 +31,9 @@
           "description": "Antigua capital imperial con más de 2,000 templos y jardines zen.",
           "budgetPerDay": 80, "recommendedDays": 4, "currency": "JPY", "language": "Japonés",
           "bestSeason": "Marzo - Mayo, Oct - Nov", "image": "kioto",
+          "climate": "Subtropical húmedo", "gastronomy": "Kaiseki, matcha, yudofu, tsukemono",
+          "landmarks": ["Fushimi Inari", "Kinkaku-ji", "Bosque de Bambú"],
+          "popularity": 90,
           "attractions": [
             { "key": "fushimi-inari", "name": "Fushimi Inari", "type": "attraction", "description": "Miles de torii rojos por la montaña.", "price": 0, "rating": 4.8 },
             { "key": "kinkaku-ji", "name": "Kinkaku-ji", "type": "attraction", "description": "Pabellón de Oro cubierto de pan de oro.", "price": 5, "rating": 4.7 },
@@ -52,6 +58,9 @@
           "description": "Metrópolis fascinante con templos dorados y street food incomparable.",
           "budgetPerDay": 40, "recommendedDays": 3, "currency": "THB", "language": "Tailandés",
           "bestSeason": "Noviembre - Febrero", "image": "bangkok",
+          "climate": "Tropical monzónico", "gastronomy": "Pad thai, tom yum, mango sticky rice",
+          "landmarks": ["Gran Palacio", "Wat Arun", "Mercado Chatuchak"],
+          "popularity": 86,
           "attractions": [
             { "key": "grand-palace", "name": "Gran Palacio", "type": "attraction", "description": "Residencia real con el Buda Esmeralda.", "price": 15, "rating": 4.7 },
             { "key": "wat-arun", "name": "Wat Arun", "type": "attraction", "description": "Templo del Amanecer junto al Chao Phraya.", "price": 3, "rating": 4.6 },

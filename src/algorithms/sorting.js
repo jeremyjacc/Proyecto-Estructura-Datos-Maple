@@ -16,19 +16,29 @@ function merge(left, right, comparator) {
 
 export function mergeSort(array, comparator = defaultComparator) {
   if (array.length <= 1) return [...array];
+  
+  const comp = typeof comparator === 'string'
+    ? (a, b) => { if (a[comparator] < b[comparator]) return -1; if (a[comparator] > b[comparator]) return 1; return 0; }
+    : comparator;
+    
   const mid = Math.floor(array.length / 2);
-  const sortedLeft = mergeSort(array.slice(0, mid), comparator);
-  const sortedRight = mergeSort(array.slice(mid), comparator);
-  return merge(sortedLeft, sortedRight, comparator);
+  const sortedLeft = mergeSort(array.slice(0, mid), comp);
+  const sortedRight = mergeSort(array.slice(mid), comp);
+  return merge(sortedLeft, sortedRight, comp);
 }
 
 export function quickSort(array, comparator = defaultComparator) {
   if (array.length <= 1) return [...array];
+  
+  const comp = typeof comparator === 'string'
+    ? (a, b) => { if (a[comparator] < b[comparator]) return -1; if (a[comparator] > b[comparator]) return 1; return 0; }
+    : comparator;
+    
   const pivot = array[Math.floor(array.length / 2)];
   const less = []; const equal = []; const greater = [];
   for (let i = 0; i < array.length; i++) {
-    const c = comparator(array[i], pivot);
+    const c = comp(array[i], pivot);
     if (c < 0) less.push(array[i]); else if (c > 0) greater.push(array[i]); else equal.push(array[i]);
   }
-  return [...quickSort(less, comparator), ...equal, ...quickSort(greater, comparator)];
+  return [...quickSort(less, comp), ...equal, ...quickSort(greater, comp)];
 }

@@ -27,7 +27,7 @@ export function searchByText(array, query, getField) {
   if (!query || query.trim() === '') return [...array];
   const lowerQuery = query.toLowerCase().trim();
   return linearSearch(array, (element) => {
-    const fieldValue = getField(element);
+    const fieldValue = getField ? getField(element) : (element.name || '');
     return fieldValue.toLowerCase().includes(lowerQuery);
   });
 }

@@ -1,5 +1,5 @@
 /**
- * dataLoader.js — Carga los JSON y construye Tree + Graph
+ * dataLoader.js — Carga los JSON y construye Tree + Graph + Tour Packages
  *
  * Conecta los datos estáticos con nuestras estructuras manuales.
  * Se ejecuta una vez al iniciar la app.
@@ -9,9 +9,25 @@ import { Graph } from '../structures/Graph.js';
 
 const CONTINENT_FILES = ['europe', 'asia', 'americas', 'africa', 'oceania'];
 
+/** Map of city image keys to actual file paths */
+const CITY_IMAGES = {
+  barcelona: '/images/barcelona.png',
+  paris: '/images/paris.png',
+  tokio: '/images/tokio.png',
+  roma: '/images/roma.png',
+  cdmx: '/images/cdmx.png',
+  marrakech: '/images/marrakech.png',
+  sydney: '/images/sydney.png',
+  cancun: '/images/cancun.png',
+};
+
+function getCityImage(imageKey) {
+  return CITY_IMAGES[imageKey] || null;
+}
+
 /**
  * Cargar todos los datos y construir las estructuras.
- * @returns {{ tree: Tree, graph: Graph, allCities: Array, continents: Array }}
+ * @returns {{ tree: Tree, graph: Graph, allCities: Array, continents: Array, tourPackages: Array }}
  */
 export async function loadAllData() {
   const tree = new Tree();
@@ -19,16 +35,19 @@ export async function loadAllData() {
   const allCities = [];
   const continents = [];
 
-  // Cargar todos los JSON en paralelo
-  const responses = await Promise.all(
-    CONTINENT_FILES.map((file) =>
-      fetch(`/data/${file}.json`).then((r) => r.json())
-    )
-  );
+  // Cargar todos los JSON en paralelo (ciudades + paquetes)
+  const [responses, packagesRes] = await Promise.all([
+    Promise.all(
+      CONTINENT_FILES.map((file) =>
+        fetch(`/data/${file}.json`).then((r) => r.json())
+      )
+    ),
+    fetch('/data/tourPackages.json').then((r) => r.json()),
+  ]);
 
   for (const data of responses) {
     const { continent, countries, connections } = data;
-    continents.push(continent);
+    continents.push({ ...continent, image: getCityImage(continent.image) });
 
     // Insertar continente en el Tree
     tree.insert('world', continent.key, {
@@ -45,6 +64,8 @@ export async function loadAllData() {
       }, 'country');
 
       for (const city of country.cities) {
+        const cityImage = getCityImage(city.image);
+
         // Insertar ciudad en el Tree
         tree.insert(country.key, city.key, {
           name: city.name,
@@ -56,7 +77,11 @@ export async function loadAllData() {
           currency: city.currency,
           language: city.language,
           bestSeason: city.bestSeason,
-          image: city.image,
+          image: cityImage,
+          climate: city.climate || '',
+          gastronomy: city.gastronomy || '',
+          landmarks: city.landmarks || [],
+          popularity: city.popularity || 50,
         }, 'city');
 
         // Insertar atracciones, hoteles y restaurantes
@@ -91,7 +116,11 @@ export async function loadAllData() {
           currency: city.currency,
           language: city.language,
           bestSeason: city.bestSeason,
-          image: city.image,
+          image: cityImage,
+          climate: city.climate || '',
+          gastronomy: city.gastronomy || '',
+          landmarks: city.landmarks || [],
+          popularity: city.popularity || 50,
           attractions: city.attractions || [],
           hotels: city.hotels || [],
           restaurants: city.restaurants || [],
@@ -112,5 +141,11 @@ export async function loadAllData() {
     }
   }
 
-  return { tree, graph, allCities, continents };
+  // Procesar Tour Packages
+  const tourPackages = (packagesRes.packages || []).map((pkg) => ({
+    ...pkg,
+    image: getCityImage(pkg.image),
+  }));
+
+  return { tree, graph, allCities, continents, tourPackages };
 }

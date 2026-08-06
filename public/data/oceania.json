@@ -1,5 +1,5 @@
 {
-  "continent": { "key": "oceania", "name": "Oceanía", "description": "Playas infinitas, arrecifes de coral y ciudades cosmopolitas.", "emoji": "🏝️" },
+  "continent": { "key": "oceania", "name": "Oceanía", "description": "Playas infinitas, arrecifes de coral y ciudades cosmopolitas.", "emoji": "🏝️", "image": "sydney" },
   "countries": [
     {
       "key": "australia", "name": "Australia", "emoji": "🇦🇺",
@@ -8,6 +8,9 @@
         "description": "Puerto icónico con la Ópera, playas de surf y escena multicultural.",
         "budgetPerDay": 110, "recommendedDays": 4, "currency": "AUD", "language": "Inglés",
         "bestSeason": "Sept - Nov, Marzo - Mayo", "image": "sydney",
+        "climate": "Oceánico húmedo", "gastronomy": "Meat pie, pavlova, fish & chips, flat white",
+        "landmarks": ["Sydney Opera House", "Bondi Beach", "Harbour Bridge"],
+        "popularity": 89,
         "attractions": [
           { "key": "opera-house", "name": "Sydney Opera House", "type": "attraction", "description": "Patrimonio de la Humanidad.", "price": 30, "rating": 4.8 },
           { "key": "bondi-beach", "name": "Bondi Beach", "type": "attraction", "description": "La playa más famosa de Australia.", "price": 0, "rating": 4.5 },
@@ -30,6 +33,9 @@
         "description": "Capital mundial de la aventura. Bungee, esquí y paisajes de LOTR.",
         "budgetPerDay": 95, "recommendedDays": 3, "currency": "NZD", "language": "Inglés",
         "bestSeason": "Dic - Feb (verano), Jun - Ago (esquí)", "image": "queenstown",
+        "climate": "Oceánico fresco", "gastronomy": "Lamb rack, green-lipped mussels, pavlova",
+        "landmarks": ["Milford Sound", "Kawarau Bungee", "Skyline Gondola"],
+        "popularity": 76,
         "attractions": [
           { "key": "milford-sound", "name": "Milford Sound", "type": "attraction", "description": "Fiordo con cascadas y delfines.", "price": 80, "rating": 4.9 },
           { "key": "bungee-kawarau", "name": "Kawarau Bungee", "type": "attraction", "description": "Donde nació el bungee jumping.", "price": 150, "rating": 4.6 },
