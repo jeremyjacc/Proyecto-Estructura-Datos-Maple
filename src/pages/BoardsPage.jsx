@@ -737,7 +737,7 @@ export default function BoardsPage() {
         <div className="modal-overlay animate-fade-in" onClick={() => { setCheckoutQueue(null); setTicket(null); }}>
           <div className="modal animate-slide-up" style={{ maxWidth: '500px' }} onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>Solicitud de Compra (Queue FIFO)</h2>
+              <h2>Solicitud de Compra</h2>
               <button className="btn-icon btn-sm" onClick={() => { setCheckoutQueue(null); setTicket(null); }}><X size={18} /></button>
             </div>
             <div className="modal-body text-center">
@@ -755,10 +755,9 @@ export default function BoardsPage() {
                 </div>
               ) : (
                 <div className="checkout-queue-process">
-                  <p className="mb-4 text-muted">Procesando requisitos. Estructura FIFO estricta.</p>
+                  <p className="mb-4 text-muted">Por favor completa los siguientes requisitos obligatorios.</p>
                   
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
-                    <div style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--accent)', alignSelf: 'flex-start', marginLeft: '12px' }}>FRONT ↓</div>
                     
                     {checkoutQueue.toArray().map((req, i) => {
                       const isFront = i === 0;
