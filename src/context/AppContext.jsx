@@ -144,24 +144,42 @@ export function AppProvider({ children }) {
     return newBoard;
   };
 
-  const deleteBoard = (boardId) => {
+  const updateBoard = (index, name, description) => {
+    // Clonar para forzar re-render en React
     const newBoards = new DynamicArray();
-    let deleted = false;
-    
     for (let i = 0; i < boards.size(); i++) {
-      const board = boards.get(i);
-      if (board.id !== boardId) {
-        newBoards.push(board);
-      } else {
-        deleted = true;
-      }
+      newBoards.push(boards.get(i));
     }
     
-    if (deleted) {
+    const boardToUpdate = newBoards.get(index);
+    if (boardToUpdate) {
+      newBoards.set(index, {
+        ...boardToUpdate,
+        name,
+        description
+      });
       setBoards(newBoards);
       saveBoardsToStorage(newBoards);
+      return true;
     }
-    return deleted;
+    return false;
+  };
+
+  const deleteBoard = (index) => {
+    // Clonar para forzar re-render en React
+    const newBoards = new DynamicArray();
+    for (let i = 0; i < boards.size(); i++) {
+      newBoards.push(boards.get(i));
+    }
+    
+    try {
+      newBoards.removeAt(index);
+      setBoards(newBoards);
+      saveBoardsToStorage(newBoards);
+      return true;
+    } catch (e) {
+      return false;
+    }
   };
 
   const addCityToBoard = (boardId, cityKey) => {
@@ -401,6 +419,7 @@ export function AppProvider({ children }) {
     // Travel Boards
     boards,
     createBoard,
+    updateBoard,
     deleteBoard,
     addCityToBoard,
     

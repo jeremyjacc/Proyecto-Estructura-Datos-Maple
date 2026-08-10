@@ -144,7 +144,7 @@ export async function loadAllData() {
   // Procesar Tour Packages
   const tourPackages = (packagesRes.packages || []).map((pkg) => ({
     ...pkg,
-    image: getCityImage(pkg.image),
+    image: getCityImage(pkg.image) || (pkg.image ? `/images/${pkg.image}.png` : null),
   }));
 
   return { tree, graph, allCities, continents, tourPackages };

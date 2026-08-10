@@ -30,7 +30,6 @@ function LinkedListVisualizer({ savedPackages, onNodeClick }) {
                 <span className="ll-node-num">{idx + 1}</span>
               </div>
               <div className="ll-node-label">{nodo.valor.name}</div>
-              <div className="ll-node-meta">{nodo.valor.adultos ?? 2}A · {nodo.valor.ninos ?? 0}N</div>
             </div>
             {nodo.siguiente !== null && (
               <div className="ll-arrow">
@@ -40,10 +39,6 @@ function LinkedListVisualizer({ savedPackages, onNodeClick }) {
             )}
           </React.Fragment>
         ))}
-      </div>
-      <div className="ll-info-row">
-        <span className="ll-badge">cabeza → Nodo[0]</span>
-        <span className="ll-badge-muted">Nodo[{nodos.length - 1}].siguiente = null</span>
       </div>
     </div>
   );
@@ -205,12 +200,13 @@ function DirectFlightsNetwork({ graph, cities }) {
 // ─── Main Page ────────────────────────────────────────────────────────────
 export default function BoardsPage() {
   const {
-    boards, createBoard, deleteBoard,
+    boards, createBoard, updateBoard, deleteBoard,
     savedPackages, removeSavedPackage, modificarPaquete, cities,
     graph
   } = useAppContext();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingBoardIndex, setEditingBoardIndex] = useState(null);
   const [newBoardName, setNewBoardName] = useState('');
   const [newBoardDesc, setNewBoardDesc] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -261,9 +257,31 @@ export default function BoardsPage() {
   const handleCreateBoard = (e) => {
     e.preventDefault();
     if (newBoardName.trim()) {
-      createBoard(newBoardName, newBoardDesc);
-      setNewBoardName(''); setNewBoardDesc(''); setIsModalOpen(false);
+      if (editingBoardIndex !== null) {
+        updateBoard(editingBoardIndex, newBoardName, newBoardDesc);
+      } else {
+        createBoard(newBoardName, newBoardDesc);
+      }
+      setNewBoardName(''); setNewBoardDesc(''); setIsModalOpen(false); setEditingBoardIndex(null);
     }
+  };
+
+  const handleOpenEditBoard = (index) => {
+    // Demostración explícita del uso de get() para obtener los datos del arreglo
+    const board = boards.get(index);
+    if (board) {
+      setEditingBoardIndex(index);
+      setNewBoardName(board.name);
+      setNewBoardDesc(board.description || '');
+      setIsModalOpen(true);
+    }
+  };
+  
+  const handleOpenNewBoard = () => {
+    setEditingBoardIndex(null);
+    setNewBoardName('');
+    setNewBoardDesc('');
+    setIsModalOpen(true);
   };
 
   // LinkedList: recorrer() para renderizar
@@ -327,7 +345,7 @@ export default function BoardsPage() {
               <h2 className="section-title">My Travel Boards</h2>
               <p className="section-subtitle">Custom itineraries you are planning</p>
             </div>
-            <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}><Plus size={18} /> New Board</button>
+            <button className="btn btn-primary" onClick={handleOpenNewBoard}><Plus size={18} /> New Board</button>
           </div>
           {boardsArray.length > 0 ? (
             <div className="grid-cards grid-cards-3 stagger">
@@ -343,9 +361,24 @@ export default function BoardsPage() {
                       </span> 
                       {board.name}
                     </h3>
-                    <button className="btn-icon btn-sm text-rose" onClick={() => deleteBoard(board.id)}><Trash2 size={16} /></button>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <button className="btn-icon btn-sm text-accent" onClick={() => handleOpenEditBoard(index)}><Edit2 size={16} /></button>
+                      <button className="btn-icon btn-sm text-rose" onClick={() => deleteBoard(index)}><Trash2 size={16} /></button>
+                    </div>
                   </div>
                   <p className="board-desc">{board.description || 'Sin descripción'}</p>
+                  
+                  {board.cities.size && board.cities.size() > 0 ? (
+                    <ul style={{ margin: '0 0 20px 0', padding: '0 0 0 24px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
+                      {board.cities.toArray().map((c, i) => {
+                        const cityName = cities.find(city => city.key === c)?.name || c;
+                        return <li key={i}>{cityName}</li>;
+                      })}
+                    </ul>
+                  ) : (
+                    <p style={{ margin: '0 0 20px 0', fontSize: '0.9rem', color: 'var(--text-muted)' }}>No hay ciudades</p>
+                  )}
+
                   <div className="board-footer">
                     <div className="board-meta"><MapPin size={14} /><span>{board.cities.size ? board.cities.size() : 0} ciudades</span></div>
                     <button 
@@ -363,7 +396,7 @@ export default function BoardsPage() {
               <Briefcase size={48} opacity={0.2} />
               <h3>Aún no tienes tableros</h3>
               <p>Crea un tablero para comenzar a planificar tu itinerario personalizado.</p>
-              <button className="btn btn-primary mt-4" onClick={() => setIsModalOpen(true)}>Crear Primer Tablero</button>
+              <button className="btn btn-primary mt-4" onClick={handleOpenNewBoard}>Crear Primer Tablero</button>
             </div>
           )}
         </section>
@@ -390,7 +423,7 @@ export default function BoardsPage() {
           <div className="section-header-flex">
             <div>
               <h2 className="section-title">Paquetes de Viaje Guardados</h2>
-              <p className="section-subtitle">Gestionado por una <strong>Lista Enlazada Simple</strong> — cada paquete es un nodo.</p>
+              <p className="section-subtitle">Tus destinos y paquetes favoritos listos para reservar.</p>
             </div>
             <div className="d-flex gap-2">
               <button className={`btn btn-sm ${showStructure ? 'btn-accent-active' : 'btn-secondary'}`} onClick={() => setShowStructure(!showStructure)}>
@@ -403,8 +436,7 @@ export default function BoardsPage() {
 
           {showStructure && (
             <div className="ll-structure-panel animate-slide-up">
-              <div className="ll-structure-header">
-                <span className="ll-title-badge">LISTA ENLAZADA — {allPackages.length} nodos</span>
+              <div className="ll-structure-header" style={{ justifyContent: 'flex-end' }}>
                 <span className="ll-hint">Haz clic en un nodo para inspeccionarlo</span>
               </div>
               <LinkedListVisualizer savedPackages={savedPackages} onNodeClick={setNodePopup} />
@@ -556,39 +588,41 @@ export default function BoardsPage() {
                 </div>
               )}
             </div>
-          ) : displayedPackages.length === 0 ? (
+          ) : (
             <div className="empty-state glass">
               <Package size={48} opacity={0.2} />
               <h3>{searchQuery ? 'No results found' : 'No Saved Packages'}</h3>
               <p>{searchQuery ? 'Try a different search term.' : "You haven't saved any tour packages yet."}</p>
               {!searchQuery && <Link to="/packages" className="btn btn-primary mt-4">Explore Packages</Link>}
             </div>
-          ) : null}
+          )}
         </section>
       </div>
 
-      {/* Modal: Create Board */}
+      {/* Modal: Create/Edit Board */}
       {isModalOpen && (
         <div className="modal-overlay animate-fade-in" onClick={() => setIsModalOpen(false)}>
           <div className="modal animate-slide-up" onClick={e => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>Create Travel Board</h2>
+              <h2>{editingBoardIndex !== null ? `Editar Tablero [${editingBoardIndex}]` : 'Nuevo Tablero de Viaje'}</h2>
               <button className="btn-icon btn-sm" onClick={() => setIsModalOpen(false)}><X size={18} /></button>
             </div>
             <form onSubmit={handleCreateBoard}>
               <div className="modal-body">
                 <div className="form-group mb-4">
-                  <label className="form-label">Board Name</label>
-                  <input type="text" className="input" placeholder="e.g., Summer in Europe 2024" value={newBoardName} onChange={e => setNewBoardName(e.target.value)} autoFocus required />
+                  <label className="form-label">Nombre del tablero</label>
+                  <input type="text" className="input" placeholder="Ej. Eurotrip 2026" value={newBoardName} onChange={e => setNewBoardName(e.target.value)} autoFocus required />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">Description (Optional)</label>
-                  <textarea className="input" placeholder="What is this trip about?" value={newBoardDesc} onChange={e => setNewBoardDesc(e.target.value)} rows="3" />
+                  <label className="form-label">Descripción (Opcional)</label>
+                  <textarea className="input" placeholder="¿De qué trata este viaje?" value={newBoardDesc} onChange={e => setNewBoardDesc(e.target.value)} rows="3" />
                 </div>
               </div>
               <div className="modal-footer">
-                <button type="button" className="btn btn-ghost" onClick={() => setIsModalOpen(false)}>Cancel</button>
-                <button type="submit" className="btn btn-primary" disabled={!newBoardName.trim()}>Create Board</button>
+                <button type="button" className="btn btn-ghost" onClick={() => setIsModalOpen(false)}>Cancelar</button>
+                <button type="submit" className="btn btn-primary" disabled={!newBoardName.trim()}>
+                  {editingBoardIndex !== null ? 'Guardar Cambios' : 'Crear Tablero'}
+                </button>
               </div>
             </form>
           </div>
