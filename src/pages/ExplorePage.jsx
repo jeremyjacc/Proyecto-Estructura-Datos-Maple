@@ -65,13 +65,14 @@ export default function ExplorePage() {
       if (details) {
         setCityDetails(details);
         // Construir breadcrumbs (Continent > Country > City) usando el Tree
-        setBreadcrumbs([
-          { label: 'Mundo', key: 'world' },
-          { label: details.continent, key: details.continent },
-          { label: details.country, key: details.country },
-          { label: details.name, key: details.key }
-        ]);
-        
+        const pathNodes = tree.getPath(selectedCityKey);
+        setBreadcrumbs(
+          pathNodes.map(node => ({
+            label: node.data.name,
+            key: node.key,
+            type: node.type
+          }))
+        );
         // Agregar al historial de navegación (Stack) si no es el actual
         pushToHistory(selectedCityKey);
       }
@@ -122,6 +123,12 @@ export default function ExplorePage() {
     } else {
       setSelectedCityKey('');
     }
+  };
+
+  const handleBreadcrumbClick = (bc) => {
+    if (bc.type === 'city') return;
+    setSelectedCityKey('');
+    setActiveNodeKey(bc.key);
   };
 
   const handleClearSearch = () => {
@@ -224,7 +231,16 @@ export default function ExplorePage() {
           <div className="breadcrumbs hidden-mobile">
             {breadcrumbs.map((bc, idx) => (
               <React.Fragment key={bc.key}>
-                <span className="breadcrumb-item">{bc.label}</span>
+                <span 
+                  className="breadcrumb-item"
+                  onClick={() => handleBreadcrumbClick(bc)}
+                  style={{ 
+                    cursor: bc.type !== 'city' ? 'pointer' : 'default',
+                    textDecoration: bc.type !== 'city' ? 'underline' : 'none' 
+                  }}
+                >
+                  {bc.label}
+                </span>
                 {idx < breadcrumbs.length - 1 && <ChevronRight size={14} />}
               </React.Fragment>
             ))}
@@ -233,7 +249,7 @@ export default function ExplorePage() {
 
         {/* Hero Image */}
         <div className="detail-hero">
-          <img src={cityDetails.image} alt={cityDetails.name} className="detail-hero-img" />
+          <img src={cityDetails.image || `/images/${cityDetails.key}.png`} alt={cityDetails.name} className="detail-hero-img" />
           <div className="detail-hero-content container">
             <div className="badge badge-white mb-4">
               <MapPin size={14} /> {cityDetails.country}, {cityDetails.continent}
