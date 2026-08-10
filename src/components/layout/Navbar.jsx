@@ -152,10 +152,7 @@ export default function Navbar() {
 
         {/* Actions */}
         <div className="navbar-actions desktop-actions">
-          <div className="search-pill">
-            <Search size={16} />
-            <span>Buscar destinos...</span>
-          </div>
+
           <Link to="/explore" className="btn btn-primary btn-sm">
             Reservar Ahora
           </Link>
