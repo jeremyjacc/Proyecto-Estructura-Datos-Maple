@@ -468,7 +468,7 @@ export default function BoardsPage() {
           </div>
           {searchQuery && (
             <p className="ll-search-info">
-              Se encontraron <strong>{displayedPackages.length}</strong> resultado{displayedPackages.length !== 1 ? 's' : ''} — recorriendo con <code>buscarPorTexto()</code> desde <code>cabeza</code>
+              Se encontraron <strong>{displayedPackages.length}</strong> resultado{displayedPackages.length !== 1 ? 's' : ''}
             </p>
           )}
 

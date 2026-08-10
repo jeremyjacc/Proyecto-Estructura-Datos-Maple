@@ -70,22 +70,7 @@ export default function HomePage() {
                 />
               </div>
             </div>
-            <div className="search-divider"></div>
-            <div className="search-input-group hidden-mobile">
-              <Calendar className="search-icon" size={20} />
-              <div className="search-field">
-                <label>Fechas</label>
-                <input type="text" placeholder="Añadir fechas" />
-              </div>
-            </div>
-            <div className="search-divider hidden-mobile"></div>
-            <div className="search-input-group hidden-mobile">
-              <Users className="search-icon" size={20} />
-              <div className="search-field">
-                <label>Huéspedes</label>
-                <input type="text" placeholder="Añadir huéspedes" />
-              </div>
-            </div>
+
             <button type="submit" className="btn btn-primary btn-search">
               <Search size={20} />
               <span>Buscar</span>
@@ -224,7 +209,7 @@ export default function HomePage() {
                       <span className="label">Desde</span>
                       <span className="amount">${pkg.price}</span>
                     </div>
-                    <Link to={`/packages`} className="btn btn-primary btn-sm">
+                    <Link to={`/packages`} state={{ selectedPackageId: pkg.id }} className="btn btn-primary btn-sm">
                       Detalles
                     </Link>
                   </div>

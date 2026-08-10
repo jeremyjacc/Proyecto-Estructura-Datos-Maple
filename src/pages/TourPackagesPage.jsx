@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useAppContext } from '../context/AppContext';
 import { Calendar, MapPin, CheckCircle2, ChevronRight, Play, X } from 'lucide-react';
 import RouteGraph from '../components/graph/RouteGraph';
@@ -8,7 +9,15 @@ import './TourPackagesPage.css';
 
 export default function TourPackagesPage() {
   const { tourPackages, cities, savePackage, startTour } = useAppContext();
-  const [selectedPackageId, setSelectedPackageId] = useState(null);
+  const location = useLocation();
+  const [selectedPackageId, setSelectedPackageId] = useState(location.state?.selectedPackageId || null);
+
+  // Si cambia la URL con nuevo estado, actualizamos
+  useEffect(() => {
+    if (location.state?.selectedPackageId) {
+      setSelectedPackageId(location.state.selectedPackageId);
+    }
+  }, [location.state]);
   
   // States para la funcionalidad FIFO de Checkout
   const [checkoutQueue, setCheckoutQueue] = useState(null);
