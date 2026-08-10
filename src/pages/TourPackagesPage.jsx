@@ -70,11 +70,13 @@ export default function TourPackagesPage() {
     
     // Add nodes for each city in the package
     pkgCities.forEach(city => {
-      packageGraph.addNode(city.key, {
-        name: city.name,
-        country: city.country,
-        image: city.image
-      });
+      if (!packageGraph.getNode(city.key)) {
+        packageGraph.addNode(city.key, {
+          name: city.name,
+          country: city.country,
+          image: city.image
+        });
+      }
     });
 
     // Add edges for the route connections
@@ -284,7 +286,10 @@ export default function TourPackagesPage() {
                   </div>
                   <button 
                     className="btn btn-primary"
-                    onClick={() => setSelectedPackageId(pkg.id)}
+                    onClick={() => {
+                      setSelectedPackageId(pkg.id);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }}
                   >
                     Ver Itinerario
                   </button>

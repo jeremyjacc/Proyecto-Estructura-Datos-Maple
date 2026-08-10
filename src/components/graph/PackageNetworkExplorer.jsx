@@ -19,11 +19,13 @@ export default function PackageNetworkExplorer({ tourPackages, cities }) {
 
     // Agregar vértices
     pkgCities.forEach(city => {
-      packageGraph.addNode(city.key, {
-        name: city.name,
-        country: city.country,
-        image: city.image
-      });
+      if (!packageGraph.getNode(city.key)) {
+        packageGraph.addNode(city.key, {
+          name: city.name,
+          country: city.country,
+          image: city.image
+        });
+      }
     });
 
     // Agregar aristas reales

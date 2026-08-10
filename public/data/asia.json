@@ -47,6 +47,25 @@
             { "key": "nishiki-market", "name": "Nishiki Market", "type": "restaurant", "description": "Más de 100 puestos de comida tradicional.", "pricePerPerson": 12, "rating": 4.6, "cuisine": "Mercado" },
             { "key": "gion-kappa", "name": "Gion Kappa", "type": "restaurant", "description": "Kaiseki en Gion con ceremonia del té.", "pricePerPerson": 40, "rating": 4.7, "cuisine": "Kaiseki" }
           ]
+        },
+        {
+          "key": "osaka", "name": "Osaka", "country": "Japón", "continent": "Asia",
+          "description": "La capital gastronómica de Japón, vibrante y llena de vida nocturna.",
+          "budgetPerDay": 90, "recommendedDays": 3, "currency": "JPY", "language": "Japonés",
+          "bestSeason": "Marzo - Mayo, Oct - Nov", "image": "tokio",
+          "climate": "Subtropical húmedo", "gastronomy": "Takoyaki, okonomiyaki, kushikatsu",
+          "landmarks": ["Castillo de Osaka", "Dotonbori"],
+          "popularity": 88,
+          "attractions": [
+            { "key": "osaka-castle", "name": "Castillo de Osaka", "type": "attraction", "description": "Castillo icónico rodeado de fosos.", "price": 6, "rating": 4.5 },
+            { "key": "dotonbori", "name": "Dotonbori", "type": "attraction", "description": "Barrio iluminado con neones y street food.", "price": 0, "rating": 4.7 }
+          ],
+          "hotels": [
+            { "key": "swissotel-nankai", "name": "Swissotel Nankai", "type": "hotel", "description": "Lujo en el corazón de Namba.", "pricePerNight": 160, "rating": 4.6, "category": "Lujo" }
+          ],
+          "restaurants": [
+            { "key": "chibo-dotonbori", "name": "Chibo", "type": "restaurant", "description": "Famoso por su okonomiyaki.", "pricePerPerson": 15, "rating": 4.4, "cuisine": "Local" }
+          ]
         }
       ]
     },
@@ -80,6 +99,8 @@
   ],
   "connections": [
     { "from": "tokio", "to": "kioto", "distance": 476, "cost": 120 },
+    { "from": "kioto", "to": "osaka", "distance": 55, "cost": 15 },
+    { "from": "osaka", "to": "tokio", "distance": 500, "cost": 130 },
     { "from": "tokio", "to": "bangkok", "distance": 4600, "cost": 250 },
     { "from": "kioto", "to": "bangkok", "distance": 4300, "cost": 230 }
   ]

@@ -1,6 +1,21 @@
 {
   "packages": [
     {
+      "id": "traditional-japan",
+      "name": "Japón Tradicional",
+      "description": "Vive la experiencia nipona definitiva. Un ciclo perfecto que inicia en el futuro de Tokio, retrocede al pasado en Kioto, disfruta en Osaka y regresa velozmente en tren bala.",
+      "duration": 12,
+      "price": 3200,
+      "image": "tokio",
+      "cities": ["tokio", "kioto", "osaka"],
+      "services": ["hotel", "shinkansen", "guide", "gastronomy"],
+      "route": [
+        { "from": "tokio", "to": "kioto", "distance": 476, "cost": 120 },
+        { "from": "kioto", "to": "osaka", "distance": 55, "cost": 15 },
+        { "from": "osaka", "to": "tokio", "distance": 500, "cost": 130 }
+      ]
+    },
+    {
       "id": "european-classic",
       "name": "European Classic",
       "description": "Recorre las joyas de Europa occidental: la arquitectura de Gaudí, los museos de Madrid, la Torre Eiffel y el Coliseo Romano.",

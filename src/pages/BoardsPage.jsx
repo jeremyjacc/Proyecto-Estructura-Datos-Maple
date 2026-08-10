@@ -332,8 +332,8 @@ export default function BoardsPage() {
     <div className="boards-page animate-fade-in">
       <div className="boards-header bg-dark">
         <div className="container">
-          <h1>My Saved Trips</h1>
-          <p>Manage your travel boards, saved packages, and custom routes.</p>
+          <h1>Mis Viajes</h1>
+          <p>Gestiona tus tableros de viaje, paquetes guardados y rutas personalizadas.</p>
         </div>
       </div>
 
@@ -568,7 +568,7 @@ export default function BoardsPage() {
                     >
                       Comprar Viaje
                     </button>
-                    <Link to="/packages" className="btn btn-primary flex-1" style={{ padding: '12px', flex: 1, textAlign: 'center', justifyContent: 'center' }}>
+                    <Link to="/packages" state={{ selectedPackageId: currentPkg.id }} className="btn btn-primary flex-1" style={{ padding: '12px', flex: 1, textAlign: 'center', justifyContent: 'center' }}>
                       Ver Itinerario
                     </Link>
                   </div>
