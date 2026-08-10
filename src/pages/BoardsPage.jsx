@@ -8,6 +8,7 @@ import {
   RotateCcw, Zap, GitBranch, Link2
 } from 'lucide-react';
 import { Queue } from '../structures/Queue.js';
+import PackageNetworkExplorer from '../components/graph/PackageNetworkExplorer';
 import './BoardsPage.css';
 
 // ─── LinkedList Visualizer ────────────────────────────────────────────────
@@ -202,7 +203,7 @@ export default function BoardsPage() {
   const {
     boards, createBoard, updateBoard, deleteBoard,
     savedPackages, removeSavedPackage, modificarPaquete, cities,
-    graph
+    graph, tourPackages
   } = useAppContext();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -403,17 +404,17 @@ export default function BoardsPage() {
 
         <hr className="section-divider" />
 
-        {/* ── Direct Flights Network ─── */}
+        {/* ── Package Network Explorer ─── */}
         <section className="boards-section">
           <div className="section-header-flex">
             <div>
-              <h2 className="section-title">✈️ Visualizar red de vuelos directos</h2>
+              <h2 className="section-title">🌍 Explora nuestras Rutas</h2>
               <p className="section-subtitle">
-                El Graph representa una red de vuelos directos. Las ciudades son nodos y los vuelos son aristas. Al seleccionar una ciudad, Maple muestra sus conexiones directas.
+                Visualiza los destinos y la distancia de cada trayecto en nuestros paquetes turísticos a través de este mapa interactivo.
               </p>
             </div>
           </div>
-          <DirectFlightsNetwork graph={graph} cities={cities} />
+          <PackageNetworkExplorer tourPackages={tourPackages} cities={cities} />
         </section>
 
         <hr className="section-divider" />

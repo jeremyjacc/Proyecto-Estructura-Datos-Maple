@@ -3,6 +3,7 @@ import { useAppContext } from '../context/AppContext';
 import { Calendar, MapPin, CheckCircle2, ChevronRight, Play, X } from 'lucide-react';
 import RouteGraph from '../components/graph/RouteGraph';
 import { Queue } from '../structures/Queue.js';
+import { Graph } from '../structures/Graph.js';
 import './TourPackagesPage.css';
 
 export default function TourPackagesPage() {
@@ -55,6 +56,31 @@ export default function TourPackagesPage() {
       cities.find(c => c.key === cityKey)
     ).filter(Boolean);
 
+    // Build the package-specific graph dynamically
+    const packageGraph = new Graph();
+    
+    // Add nodes for each city in the package
+    pkgCities.forEach(city => {
+      packageGraph.addNode(city.key, {
+        name: city.name,
+        country: city.country,
+        image: city.image
+      });
+    });
+
+    // Add edges for the route connections
+    if (selectedPackage.route) {
+      selectedPackage.route.forEach(edge => {
+        // Ensure both nodes exist before adding the edge to avoid errors
+        if (packageGraph.getNode(edge.from) && packageGraph.getNode(edge.to)) {
+          packageGraph.addEdge(edge.from, edge.to, {
+            distance: edge.distance,
+            cost: edge.cost
+          });
+        }
+      });
+    }
+
     return (
       <div className="package-detail-view animate-fade-in">
         <div className="container pt-4">
@@ -77,9 +103,9 @@ export default function TourPackagesPage() {
 
           {/* Graph Visualization */}
           <div className="graph-section glass mb-5 p-4 rounded-xl">
-            <h3 className="section-title mb-4">Mapa de Ruta</h3>
+            <h3 className="section-title mb-4">Mapa de Ruta (Estructura Graph)</h3>
             <RouteGraph 
-              route={selectedPackage.route} 
+              packageGraph={packageGraph} 
               cities={pkgCities} 
             />
           </div>

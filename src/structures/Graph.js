@@ -1,5 +1,5 @@
 /**
- * Graph — Grafo No Dirigido con Pesos (Lista de Adyacencia)
+ * Graph — Grafo Dirigido con Pesos (Lista de Adyacencia)
  * Propósito: Red independiente de conexiones entre ciudades.
  */
 export class GraphNode {
@@ -29,16 +29,14 @@ export class Graph {
     if (!node1 || !node2) throw new Error(`Cannot add edge: node not found`);
     if (this.hasEdge(key1, key2)) return;
     node1.edges.push({ node: key2, distance: weight.distance || 0, cost: weight.cost || 0 });
-    node2.edges.push({ node: key1, distance: weight.distance || 0, cost: weight.cost || 0 });
   }
 
   removeEdge(key1, key2) {
-    const n1 = this.nodes.get(key1); const n2 = this.nodes.get(key2);
-    if (!n1 || !n2) return false;
-    const l1 = n1.edges.length; const l2 = n2.edges.length;
+    const n1 = this.nodes.get(key1);
+    if (!n1) return false;
+    const l1 = n1.edges.length;
     n1.edges = n1.edges.filter((e) => e.node !== key2);
-    n2.edges = n2.edges.filter((e) => e.node !== key1);
-    return n1.edges.length < l1 || n2.edges.length < l2;
+    return n1.edges.length < l1;
   }
 
   hasEdge(key1, key2) {
@@ -93,6 +91,6 @@ export class Graph {
   }
 
   getNodeCount() { return this.nodes.size; }
-  getEdgeCount() { let c = 0; this.nodes.forEach((n) => { c += n.edges.length; }); return c / 2; }
+  getEdgeCount() { let c = 0; this.nodes.forEach((n) => { c += n.edges.length; }); return c; }
   isEmpty() { return this.nodes.size === 0; }
 }

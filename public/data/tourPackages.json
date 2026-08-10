@@ -3,77 +3,89 @@
     {
       "id": "european-classic",
       "name": "European Classic",
-      "description": "Recorre las joyas de Europa occidental: la arquitectura de Gaudí, los museos de Madrid, la Torre Eiffel y el Coliseo Romano en una experiencia inolvidable.",
+      "description": "Recorre las joyas de Europa occidental: la arquitectura de Gaudí, los museos de Madrid, la Torre Eiffel y el Coliseo Romano.",
       "duration": 14,
       "price": 2800,
       "image": "roma",
       "cities": ["barcelona", "madrid", "paris", "roma"],
       "services": ["hotel", "transport", "guide", "breakfast"],
       "route": [
-        { "from": "barcelona", "to": "madrid", "distance": 620, "cost": 45 },
+        { "from": "madrid", "to": "barcelona", "distance": 620, "cost": 45 },
         { "from": "madrid", "to": "paris", "distance": 1275, "cost": 90 },
+        { "from": "barcelona", "to": "roma", "distance": 1365, "cost": 85 },
         { "from": "paris", "to": "roma", "distance": 1430, "cost": 95 }
       ]
     },
     {
       "id": "latin-adventure",
       "name": "Latin Adventure",
-      "description": "Explora la riqueza cultural de América Latina: desde los templos aztecas y cenotes de México hasta el arte callejero de Bogotá.",
-      "duration": 10,
-      "price": 1500,
+      "description": "Explora la riqueza cultural de América Latina y cruza el charco hacia España para descubrir las raíces históricas.",
+      "duration": 14,
+      "price": 2100,
       "image": "cdmx",
-      "cities": ["cdmx", "cancun", "bogota"],
+      "cities": ["cdmx", "cancun", "bogota", "madrid"],
       "services": ["hotel", "transport", "meals", "guide"],
       "route": [
         { "from": "cdmx", "to": "cancun", "distance": 1620, "cost": 80 },
-        { "from": "cancun", "to": "bogota", "distance": 2370, "cost": 150 }
+        { "from": "cdmx", "to": "bogota", "distance": 3660, "cost": 180 },
+        { "from": "cancun", "to": "bogota", "distance": 2370, "cost": 150 },
+        { "from": "bogota", "to": "madrid", "distance": 8000, "cost": 400 }
       ]
     },
     {
       "id": "mediterranean-dream",
       "name": "Mediterranean Dream",
-      "description": "Un viaje por el Mediterráneo: tapas en Sevilla, flamenco y la Ciudad Eterna con su historia milenaria y gastronomía incomparable.",
-      "duration": 10,
-      "price": 2000,
+      "description": "Un viaje por el Mediterráneo: desde la cuna del flamenco, pasando por la capital española y la costa catalana, hasta la Ciudad Eterna.",
+      "duration": 12,
+      "price": 2300,
       "image": "sevilla",
-      "cities": ["barcelona", "sevilla", "roma"],
+      "cities": ["sevilla", "madrid", "barcelona", "roma"],
       "services": ["hotel", "transport", "breakfast", "tours"],
       "route": [
-        { "from": "barcelona", "to": "sevilla", "distance": 1000, "cost": 65 },
-        { "from": "sevilla", "to": "roma", "distance": 2100, "cost": 120 }
+        { "from": "sevilla", "to": "madrid", "distance": 530, "cost": 38 },
+        { "from": "sevilla", "to": "barcelona", "distance": 1000, "cost": 65 },
+        { "from": "madrid", "to": "barcelona", "distance": 620, "cost": 45 },
+        { "from": "barcelona", "to": "roma", "distance": 1365, "cost": 85 }
       ]
     },
     {
       "id": "spanish-heritage",
       "name": "Spanish Heritage",
-      "description": "Descubre la diversidad de España: desde la cosmopolita Barcelona hasta el flamenco de Sevilla, pasando por la majestuosidad de Madrid.",
-      "duration": 9,
-      "price": 1600,
+      "description": "Descubre la diversidad de España y finaliza tu viaje en la ciudad más romántica del mundo, París.",
+      "duration": 12,
+      "price": 1900,
       "image": "barcelona",
-      "cities": ["barcelona", "madrid", "sevilla"],
+      "cities": ["barcelona", "madrid", "sevilla", "paris"],
       "services": ["hotel", "transport", "guide", "wine-tasting"],
       "route": [
         { "from": "barcelona", "to": "madrid", "distance": 620, "cost": 45 },
-        { "from": "madrid", "to": "sevilla", "distance": 530, "cost": 38 }
+        { "from": "barcelona", "to": "sevilla", "distance": 1000, "cost": 65 },
+        { "from": "madrid", "to": "sevilla", "distance": 530, "cost": 38 },
+        { "from": "madrid", "to": "paris", "distance": 1275, "cost": 90 },
+        { "from": "barcelona", "to": "paris", "distance": 1035, "cost": 80 }
       ]
     },
     {
       "id": "paris-roma-express",
       "name": "Paris & Roma Express",
-      "description": "Dos de las ciudades más románticas del mundo en un solo viaje: arte, gastronomía y belleza arquitectónica incomparables.",
-      "duration": 8,
-      "price": 1900,
+      "description": "Arte, gastronomía y belleza arquitectónica cruzando desde Madrid y Barcelona hacia París y Roma.",
+      "duration": 10,
+      "price": 2100,
       "image": "paris",
-      "cities": ["paris", "roma"],
+      "cities": ["madrid", "barcelona", "paris", "roma"],
       "services": ["hotel", "transport", "breakfast", "museum-pass"],
       "route": [
-        { "from": "paris", "to": "roma", "distance": 1430, "cost": 95 }
+        { "from": "madrid", "to": "barcelona", "distance": 620, "cost": 45 },
+        { "from": "madrid", "to": "paris", "distance": 1275, "cost": 90 },
+        { "from": "barcelona", "to": "paris", "distance": 1035, "cost": 80 },
+        { "from": "paris", "to": "roma", "distance": 1430, "cost": 95 },
+        { "from": "madrid", "to": "roma", "distance": 1950, "cost": 100 }
       ]
     },
     {
       "id": "grand-tour",
       "name": "Grand Tour",
-      "description": "La ruta definitiva por Europa y América: un viaje épico cruzando continentes con las ciudades más icónicas del mundo.",
+      "description": "La ruta definitiva por América y Europa: un viaje épico con las ciudades más icónicas del mundo.",
       "duration": 21,
       "price": 4500,
       "image": "paris",
@@ -81,10 +93,13 @@
       "services": ["hotel", "transport", "guide", "meals", "insurance"],
       "route": [
         { "from": "cdmx", "to": "bogota", "distance": 3660, "cost": 180 },
+        { "from": "cdmx", "to": "madrid", "distance": 9000, "cost": 450 },
         { "from": "bogota", "to": "barcelona", "distance": 8500, "cost": 350 },
         { "from": "barcelona", "to": "madrid", "distance": 620, "cost": 45 },
+        { "from": "barcelona", "to": "paris", "distance": 1035, "cost": 80 },
         { "from": "madrid", "to": "paris", "distance": 1275, "cost": 90 },
-        { "from": "paris", "to": "roma", "distance": 1430, "cost": 95 }
+        { "from": "paris", "to": "roma", "distance": 1430, "cost": 95 },
+        { "from": "barcelona", "to": "roma", "distance": 1365, "cost": 85 }
       ]
     }
   ]
