@@ -32,7 +32,7 @@ export default function HomePage() {
     return (
       <div className="loading-state">
         <div className="loading-spinner"></div>
-        <p>Loading amazing destinations...</p>
+        <p>Cargando destinos increíbles...</p>
       </div>
     );
   }
@@ -48,23 +48,23 @@ export default function HomePage() {
         
         <div className="container hero-content animate-slide-up">
           <div className="badge badge-white mb-4">
-            <Globe2 size={14} /> Discover the extraordinary
+            <Globe2 size={14} /> Descubre lo extraordinario
           </div>
           <h1 className="hero-title">
-            Explore the world's<br/>most beautiful places
+            Explora los lugares<br/>más hermosos del mundo
           </h1>
           <p className="hero-subtitle">
-            Find your next adventure with our curated selection of exclusive destinations and tour packages.
+            Encuentra tu próxima aventura con nuestra selección de destinos y paquetes exclusivos.
           </p>
 
           <form className="hero-search glass" onSubmit={handleSearch}>
             <div className="search-input-group">
               <MapPin className="search-icon" size={20} />
               <div className="search-field">
-                <label>Location</label>
+                <label>Destino</label>
                 <input 
                   type="text" 
-                  placeholder="Where do you want to go?" 
+                  placeholder="¿A dónde quieres ir?" 
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
@@ -74,21 +74,21 @@ export default function HomePage() {
             <div className="search-input-group hidden-mobile">
               <Calendar className="search-icon" size={20} />
               <div className="search-field">
-                <label>Date</label>
-                <input type="text" placeholder="Add dates" />
+                <label>Fechas</label>
+                <input type="text" placeholder="Añadir fechas" />
               </div>
             </div>
             <div className="search-divider hidden-mobile"></div>
             <div className="search-input-group hidden-mobile">
               <Users className="search-icon" size={20} />
               <div className="search-field">
-                <label>Guests</label>
-                <input type="text" placeholder="Add guests" />
+                <label>Huéspedes</label>
+                <input type="text" placeholder="Añadir huéspedes" />
               </div>
             </div>
             <button type="submit" className="btn btn-primary btn-search">
               <Search size={20} />
-              <span>Search</span>
+              <span>Buscar</span>
             </button>
           </form>
         </div>
@@ -101,29 +101,29 @@ export default function HomePage() {
             <div className="trust-item">
               <div className="trust-icon"><ShieldCheck size={28} /></div>
               <div>
-                <h3>Safe Travels</h3>
-                <p>Verified destinations and guides</p>
+                <h3>Viajes Seguros</h3>
+                <p>Destinos y guías verificados</p>
               </div>
             </div>
             <div className="trust-item">
               <div className="trust-icon"><Globe2 size={28} /></div>
               <div>
-                <h3>50+ Destinations</h3>
-                <p>Explore all continents</p>
+                <h3>Más de 50 Destinos</h3>
+                <p>Explora todos los continentes</p>
               </div>
             </div>
             <div className="trust-item">
               <div className="trust-icon"><Star size={28} /></div>
               <div>
-                <h3>12k+ Travelers</h3>
-                <p>Top rated experiences</p>
+                <h3>12k+ Viajeros</h3>
+                <p>Experiencias mejor valoradas</p>
               </div>
             </div>
             <div className="trust-item">
               <div className="trust-icon"><Clock size={28} /></div>
               <div>
-                <h3>24/7 Support</h3>
-                <p>We are here to help anytime</p>
+                <h3>Soporte 24/7</h3>
+                <p>Estamos aquí para ayudar</p>
               </div>
             </div>
           </div>
@@ -135,11 +135,11 @@ export default function HomePage() {
         <div className="container">
           <div className="section-header-flex">
             <div>
-              <h2 className="section-title">Trending Destinations</h2>
-              <p className="section-subtitle">Most popular choices for travelers this month</p>
+              <h2 className="section-title">Destinos en Tendencia</h2>
+              <p className="section-subtitle">Las opciones más populares de este mes</p>
             </div>
             <Link to="/explore" className="btn btn-secondary">
-              View all <ChevronRight size={16} />
+              Ver todos <ChevronRight size={16} />
             </Link>
           </div>
 
@@ -155,7 +155,7 @@ export default function HomePage() {
                 <div className="card-content">
                   <div className="card-header">
                     <h3>{city.name}</h3>
-                    <span className="card-price">${city.budgetPerDay}<small>/day</small></span>
+                    <span className="card-price">${city.budgetPerDay}<small>/día</small></span>
                   </div>
                   <p className="card-location"><MapPin size={14} /> {city.country}, {city.continent}</p>
                 </div>
@@ -169,8 +169,8 @@ export default function HomePage() {
       <section className="section explore-continents bg-tertiary">
         <div className="container">
           <div className="section-header center">
-            <h2 className="section-title">Explore by Continent</h2>
-            <p className="section-subtitle">Find your next destination by exploring different parts of the world</p>
+            <h2 className="section-title">Explorar por Continente</h2>
+            <p className="section-subtitle">Encuentra tu próximo destino explorando diferentes partes del mundo</p>
           </div>
 
           <div className="continent-grid stagger">
@@ -196,11 +196,11 @@ export default function HomePage() {
         <div className="container">
           <div className="section-header-flex">
             <div>
-              <h2 className="section-title">Curated Tour Packages</h2>
-              <p className="section-subtitle">Complete travel itineraries planned by experts</p>
+              <h2 className="section-title">Paquetes Turísticos Exclusivos</h2>
+              <p className="section-subtitle">Itinerarios de viaje completos planeados por expertos</p>
             </div>
             <Link to="/packages" className="btn btn-secondary">
-              View all packages <ChevronRight size={16} />
+              Ver todos los paquetes <ChevronRight size={16} />
             </Link>
           </div>
 
@@ -210,7 +210,7 @@ export default function HomePage() {
                 <div className="package-img">
                   <img src={pkg.image || `/images/${pkg.image}.png`} alt={pkg.name} />
                   <div className="package-duration">
-                    <Calendar size={14} /> {pkg.duration} Days
+                    <Calendar size={14} /> {pkg.duration} Días
                   </div>
                 </div>
                 <div className="package-content">
@@ -221,11 +221,11 @@ export default function HomePage() {
                   <p className="package-desc truncate">{pkg.description}</p>
                   <div className="package-footer">
                     <div className="package-price">
-                      <span className="label">From</span>
+                      <span className="label">Desde</span>
                       <span className="amount">${pkg.price}</span>
                     </div>
                     <Link to={`/packages`} className="btn btn-primary btn-sm">
-                      Details
+                      Detalles
                     </Link>
                   </div>
                 </div>
@@ -240,11 +240,11 @@ export default function HomePage() {
         <div className="container">
           <div className="cta-box glass">
             <div className="cta-content">
-              <h2>Ready to start your journey?</h2>
-              <p>Create your custom travel board, save your favorite destinations, and plan your perfect itinerary today.</p>
+              <h2>¿Listo para comenzar tu viaje?</h2>
+              <p>Crea tu tablero de viaje personalizado, guarda tus destinos favoritos y planifica tu itinerario perfecto hoy mismo.</p>
               <div className="cta-buttons">
-                <Link to="/explore" className="btn btn-primary btn-lg">Start Exploring</Link>
-                <Link to="/boards" className="btn btn-outline btn-lg" style={{borderColor: 'var(--accent)', color: 'var(--accent)'}}>My Saved Trips</Link>
+                <Link to="/explore" className="btn btn-primary btn-lg">Empezar a Explorar</Link>
+                <Link to="/boards" className="btn btn-outline btn-lg" style={{borderColor: 'var(--accent)', color: 'var(--accent)'}}>Mis Viajes Guardados</Link>
               </div>
             </div>
           </div>

@@ -14,7 +14,7 @@ export default function Footer() {
             <span>Travel Explorer</span>
           </Link>
           <p className="footer-desc">
-            Discover the world's most amazing destinations. Plan, book, and explore with confidence.
+            Descubre los destinos más increíbles del mundo. Planifica, reserva y explora con confianza.
           </p>
           <div className="footer-social">
             <a href="#" className="social-link"><Hash size={20} /></a>
@@ -25,37 +25,37 @@ export default function Footer() {
         </div>
 
         <div className="footer-links-group">
-          <h4 className="footer-title">Explore</h4>
+          <h4 className="footer-title">Explorar</h4>
           <ul className="footer-list">
-            <li><Link to="/explore">Destinations</Link></li>
-            <li><Link to="/packages">Tour Packages</Link></li>
-            <li><Link to="/boards">Saved Trips</Link></li>
+            <li><Link to="/explore">Destinos</Link></li>
+            <li><Link to="/packages">Paquetes de Viaje</Link></li>
+            <li><Link to="/boards">Mis Viajes Guardados</Link></li>
           </ul>
         </div>
 
         <div className="footer-links-group">
-          <h4 className="footer-title">Company</h4>
+          <h4 className="footer-title">Compañía</h4>
           <ul className="footer-list">
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Travel Guides</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><a href="#">Sobre Nosotros</a></li>
+            <li><a href="#">Empleos</a></li>
+            <li><a href="#">Guías de Viaje</a></li>
+            <li><a href="#">Contacto</a></li>
           </ul>
         </div>
 
         <div className="footer-links-group">
           <h4 className="footer-title">Legal</h4>
           <ul className="footer-list">
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Términos de Servicio</a></li>
+            <li><a href="#">Política de Privacidad</a></li>
+            <li><a href="#">Política de Cookies</a></li>
           </ul>
         </div>
 
       </div>
       
       <div className="footer-bottom container">
-        <p>&copy; {new Date().getFullYear()} Travel Explorer. Academic Project.</p>
+        <p>&copy; {new Date().getFullYear()} Travel Explorer. Proyecto Académico.</p>
       </div>
     </footer>
   );

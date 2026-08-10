@@ -34,6 +34,9 @@ export function AppProvider({ children }) {
   // 4. Queue: Cola de recorrido para un Tour Package activo
   const [activeTourQueue, setActiveTourQueue] = useState(new Queue());
 
+  // 5. Graph del usuario: constructor de rutas en "My First Trip"
+  const [userGraph, setUserGraph] = useState(new Graph());
+
   // Carga inicial de datos
   useEffect(() => {
     async function initData() {
@@ -193,19 +196,52 @@ export function AppProvider({ children }) {
     // Evitar duplicados
     const exists = newList.toArray().some(p => p.id === pkg.id);
     if (!exists) {
-      newList.append({ ...pkg, savedAt: new Date().toISOString() });
+      // Enriquecer con datos de reserva (adultos, niños, total)
+      const precioAdulto = pkg.price || 0;
+      const precioNino = Math.round(precioAdulto * 0.7);
+      const adultos = 2;
+      const ninos = 0;
+      newList.append({
+        ...pkg,
+        savedAt: new Date().toISOString(),
+        precioAdulto,
+        precioNino,
+        adultos,
+        ninos,
+        total: adultos * precioAdulto,
+        capacidadMaxima: pkg.maxPeople || 10,
+      });
       setSavedPackages(newList);
       savePackagesToStorage(newList);
     }
   };
 
   const removeSavedPackage = (pkgId) => {
+    // Usar eliminar() de la ListaEnlazada directamente sobre los nodos
     const newList = new LinkedList();
     savedPackages.toArray().forEach(p => {
-      if (p.id !== pkgId) newList.append(p);
+      if (p.id !== pkgId) newList.agregar(p);
     });
     setSavedPackages(newList);
     savePackagesToStorage(newList);
+  };
+
+  const buscarPaquete = (texto) => {
+    if (!texto.trim()) return savedPackages.recorrer();
+    return savedPackages.buscarPorTexto(texto);
+  };
+
+  const modificarPaquete = (pkgId, adultos, ninos) => {
+    // Llamar modificar() sobre la ListaEnlazada real — modifica el nodo directamente
+    const resultado = savedPackages.modificar(pkgId, adultos, ninos);
+    if (resultado.exito) {
+      // Forzar re-render clonando la referencia del estado
+      const newList = new LinkedList();
+      savedPackages.recorrer().forEach(p => newList.agregar(p));
+      setSavedPackages(newList);
+      savePackagesToStorage(newList);
+    }
+    return resultado;
   };
 
   // --- Métodos para Historial de Navegación (Stack) ---
@@ -257,6 +293,76 @@ export function AppProvider({ children }) {
     setNavigationHistory(new Stack());
   };
 
+  // --- Métodos para el Graph del usuario (My First Trip) ---
+  const addUserCity = (key, data) => {
+    if (userGraph.getNode(key)) return false;
+    const newGraph = new Graph();
+    // Clonar nodos existentes
+    userGraph.getAllNodes().forEach(n => newGraph.addNode(n.key, n.data));
+    // Clonar aristas
+    userGraph.getAllNodes().forEach(n => {
+      n.edges.forEach(e => {
+        if (!newGraph.hasEdge(n.key, e.node)) {
+          try { newGraph.addEdge(n.key, e.node, { distance: e.distance, cost: e.cost }); } catch {}
+        }
+      });
+    });
+    newGraph.addNode(key, data);
+    setUserGraph(newGraph);
+    return true;
+  };
+
+  const removeUserCity = (key) => {
+    const newGraph = new Graph();
+    userGraph.getAllNodes().forEach(n => {
+      if (n.key !== key) newGraph.addNode(n.key, n.data);
+    });
+    userGraph.getAllNodes().forEach(n => {
+      if (n.key !== key) {
+        n.edges.forEach(e => {
+          if (e.node !== key && !newGraph.hasEdge(n.key, e.node)) {
+            try { newGraph.addEdge(n.key, e.node, { distance: n.edges.find(ed => ed.node === e.node)?.distance || 0, cost: n.edges.find(ed => ed.node === e.node)?.cost || 0 }); } catch {}
+          }
+        });
+      }
+    });
+    setUserGraph(newGraph);
+  };
+
+  const addUserConnection = (key1, key2, distance = 0, cost = 0) => {
+    if (!userGraph.getNode(key1) || !userGraph.getNode(key2)) return false;
+    if (userGraph.hasEdge(key1, key2)) return false;
+    const newGraph = new Graph();
+    userGraph.getAllNodes().forEach(n => newGraph.addNode(n.key, n.data));
+    userGraph.getAllNodes().forEach(n => {
+      n.edges.forEach(e => {
+        if (!newGraph.hasEdge(n.key, e.node)) {
+          try { newGraph.addEdge(n.key, e.node, { distance: e.distance, cost: e.cost }); } catch {}
+        }
+      });
+    });
+    newGraph.addEdge(key1, key2, { distance, cost });
+    setUserGraph(newGraph);
+    return true;
+  };
+
+  const removeUserConnection = (key1, key2) => {
+    const newGraph = new Graph();
+    userGraph.getAllNodes().forEach(n => newGraph.addNode(n.key, n.data));
+    userGraph.getAllNodes().forEach(n => {
+      n.edges.forEach(e => {
+        if (!((n.key === key1 && e.node === key2) || (n.key === key2 && e.node === key1))) {
+          if (!newGraph.hasEdge(n.key, e.node)) {
+            try { newGraph.addEdge(n.key, e.node, { distance: e.distance, cost: e.cost }); } catch {}
+          }
+        }
+      });
+    });
+    setUserGraph(newGraph);
+  };
+
+  const clearUserGraph = () => setUserGraph(new Graph());
+
   // --- Métodos para Tour Activo (Queue) ---
   const startTour = (citiesArray) => {
     const newQueue = new Queue();
@@ -302,6 +408,8 @@ export function AppProvider({ children }) {
     savedPackages,
     savePackage,
     removeSavedPackage,
+    buscarPaquete,
+    modificarPaquete,
     
     // Navigation History
     navigationHistory,
@@ -313,7 +421,15 @@ export function AppProvider({ children }) {
     activeTourQueue,
     startTour,
     nextTourCity,
-    endTour
+    endTour,
+
+    // User Graph (My First Trip)
+    userGraph,
+    addUserCity,
+    removeUserCity,
+    addUserConnection,
+    removeUserConnection,
+    clearUserGraph,
   };
 
   return (

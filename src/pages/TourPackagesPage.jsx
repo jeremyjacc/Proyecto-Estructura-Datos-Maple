@@ -1,25 +1,52 @@
 import React, { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
-import { Calendar, MapPin, CheckCircle2, ChevronRight, Play } from 'lucide-react';
+import { Calendar, MapPin, CheckCircle2, ChevronRight, Play, X } from 'lucide-react';
 import RouteGraph from '../components/graph/RouteGraph';
+import { Queue } from '../structures/Queue.js';
 import './TourPackagesPage.css';
 
 export default function TourPackagesPage() {
   const { tourPackages, cities, savePackage, startTour } = useAppContext();
   const [selectedPackageId, setSelectedPackageId] = useState(null);
+  
+  // States para la funcionalidad FIFO de Checkout
+  const [checkoutQueue, setCheckoutQueue] = useState(null);
+  const [checkoutTick, setCheckoutTick] = useState(0);
+  const [ticket, setTicket] = useState(null);
 
   const selectedPackage = tourPackages.find(p => p.id === selectedPackageId);
 
-  const handleStartTour = (pkg) => {
-    // Iniciar el tour: meter ciudades a la Queue
-    startTour(pkg.cities);
-    // TODO: en una implementación completa, esto podría redirigir a un modo "Tour Activo"
-    alert(`Tour started! Added ${pkg.cities.length} cities to your active queue.`);
+  const handleBuyPackage = (pkg) => {
+    const q = new Queue();
+    q.enqueue({ id: 1, name: '🛂 Pasaporte' });
+    q.enqueue({ id: 2, name: '📄 Antecedentes' });
+    q.enqueue({ id: 3, name: '🏨 Hospedaje' });
+    q.enqueue({ id: 4, name: '🛡️ Seguro' });
+    setCheckoutQueue(q);
+    setTicket(null);
+    setCheckoutTick(0);
+  };
+
+  const handleFulfillRequirement = () => {
+    if (!checkoutQueue || checkoutQueue.isEmpty()) return;
+    checkoutQueue.dequeue();
+    
+    if (checkoutQueue.isEmpty()) {
+      setTicket({
+        id: `TKT-${Math.random().toString(36).substr(2, 6).toUpperCase()}`,
+        pkgName: selectedPackage.name,
+        status: 'En revisión',
+        message: 'Tu solicitud será revisada en aproximadamente 10 minutos.'
+      });
+      setCheckoutQueue(null);
+    } else {
+      setCheckoutTick(prev => prev + 1);
+    }
   };
 
   const handleSavePackage = (pkg) => {
     savePackage(pkg);
-    alert('Package saved to your trips!');
+    alert('¡Paquete guardado en tus viajes!');
   };
 
   // --- Vista de Detalle de Paquete ---
@@ -35,14 +62,14 @@ export default function TourPackagesPage() {
             className="btn btn-ghost mb-4"
             onClick={() => setSelectedPackageId(null)}
           >
-            &larr; Back to Packages
+            &larr; Volver a Paquetes
           </button>
         </div>
 
         <div className="container detail-content">
           <div className="package-header text-center mb-5">
             <div className="badge badge-accent mb-3 mx-auto">
-              {selectedPackage.duration} Days
+              {selectedPackage.duration} Días
             </div>
             <h1 className="display-title">{selectedPackage.name}</h1>
             <p className="subtitle">{selectedPackage.description}</p>
@@ -50,7 +77,7 @@ export default function TourPackagesPage() {
 
           {/* Graph Visualization */}
           <div className="graph-section glass mb-5 p-4 rounded-xl">
-            <h3 className="section-title mb-4">Route Map</h3>
+            <h3 className="section-title mb-4">Mapa de Ruta</h3>
             <RouteGraph 
               route={selectedPackage.route} 
               cities={pkgCities} 
@@ -60,7 +87,7 @@ export default function TourPackagesPage() {
           <div className="package-grid">
             {/* Itinerary */}
             <div className="itinerary-section">
-              <h3 className="section-title mb-4">Itinerary</h3>
+              <h3 className="section-title mb-4">Itinerario</h3>
               <div className="timeline">
                 {pkgCities.map((city, index) => (
                   <div key={city.key} className="timeline-item">
@@ -85,11 +112,11 @@ export default function TourPackagesPage() {
               <div className="booking-card glass sticky">
                 <div className="price-header">
                   <span className="price">${selectedPackage.price}</span>
-                  <span className="unit">per person</span>
+                  <span className="unit">por persona</span>
                 </div>
                 
                 <div className="services-list mb-4">
-                  <h4 className="text-sm uppercase text-muted mb-3 font-bold">Included</h4>
+                  <h4 className="text-sm uppercase text-muted mb-3 font-bold">Incluido</h4>
                   {selectedPackage.services.map((service, i) => (
                     <div key={i} className="service-item">
                       <CheckCircle2 size={16} className="text-emerald" />
@@ -100,22 +127,81 @@ export default function TourPackagesPage() {
 
                 <div className="d-flex flex-column gap-3">
                   <button 
+                    className="btn btn-accent btn-block btn-lg"
+                    onClick={() => handleBuyPackage(selectedPackage)}
+                  >
+                    Comprar Viaje
+                  </button>
+                  <button 
                     className="btn btn-primary btn-block btn-lg"
                     onClick={() => handleSavePackage(selectedPackage)}
                   >
-                    Save Package
-                  </button>
-                  <button 
-                    className="btn btn-secondary btn-block"
-                    onClick={() => handleStartTour(selectedPackage)}
-                  >
-                    <Play size={16} /> Start Virtual Tour
+                    Guardar Paquete
                   </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Checkout Queue Modal (FIFO) */}
+        {(checkoutQueue || ticket) && (
+          <div className="modal-overlay animate-fade-in" onClick={() => { setCheckoutQueue(null); setTicket(null); }}>
+            <div className="modal animate-slide-up" style={{ maxWidth: '500px' }} onClick={e => e.stopPropagation()}>
+              <div className="modal-header">
+                <h2>Solicitud de Compra (Queue FIFO)</h2>
+                <button className="btn-icon btn-sm" onClick={() => { setCheckoutQueue(null); setTicket(null); }}><X size={18} /></button>
+              </div>
+              <div className="modal-body text-center">
+                {ticket ? (
+                  <div className="ticket-success">
+                    <div style={{ fontSize: '48px', marginBottom: '16px' }}>🎫</div>
+                    <h3 className="text-emerald mb-2">Solicitud Generada</h3>
+                    <div className="glass p-3 mb-3 text-left" style={{ borderRadius: 'var(--radius-md)' }}>
+                      <p className="mb-2"><strong>Ticket ID:</strong> {ticket.id}</p>
+                      <p className="mb-2"><strong>Viaje:</strong> {ticket.pkgName}</p>
+                      <p className="mb-0"><strong>Estado:</strong> <span className="badge badge-accent" style={{ marginLeft: '8px' }}>{ticket.status}</span></p>
+                    </div>
+                    <p className="text-muted text-sm">{ticket.message}</p>
+                    <button className="btn btn-primary mt-4 btn-block" onClick={() => setTicket(null)}>Aceptar</button>
+                  </div>
+                ) : (
+                  <div className="checkout-queue-process">
+                    <p className="mb-4 text-muted">Procesando requisitos. Estructura FIFO estricta.</p>
+                    
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
+                      <div style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--accent)', alignSelf: 'flex-start', marginLeft: '12px' }}>FRONT ↓</div>
+                      
+                      {checkoutQueue.toArray().map((req, i) => {
+                        const isFront = i === 0;
+                        return (
+                          <div key={req.id} className={`glass d-flex align-center justify-between p-3`} style={{ 
+                            borderRadius: 'var(--radius-md)', 
+                            border: isFront ? '2px solid var(--accent)' : '1px solid var(--border-subtle)',
+                            opacity: isFront ? 1 : 0.6,
+                            background: isFront ? 'var(--bg-secondary)' : 'var(--bg-tertiary)'
+                          }}>
+                            <span style={{ fontWeight: isFront ? 'bold' : 'normal', fontSize: '1.1rem' }}>{req.name}</span>
+                            <span className="badge" style={{ background: isFront ? 'var(--accent)' : 'var(--bg-tertiary)', color: isFront ? '#fff' : 'var(--text-muted)' }}>
+                              {isFront ? '← ACTIVO' : '← bloqueado'}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                    
+                    <div className="d-flex justify-between align-center" style={{ background: 'var(--bg-secondary)', padding: '16px', borderRadius: 'var(--radius-lg)' }}>
+                      <span className="text-sm font-bold text-muted">Requisito {5 - checkoutQueue.size()} de 4</span>
+                      <button className="btn btn-accent" onClick={handleFulfillRequirement}>
+                        Cumplido: {checkoutQueue.peek().name}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
@@ -125,10 +211,10 @@ export default function TourPackagesPage() {
     <div className="packages-page animate-fade-in">
       <div className="packages-header">
         <div className="container text-center">
-          <div className="badge badge-white mb-4">Curated Experiences</div>
-          <h1 className="hero-title">Tour Packages</h1>
+          <div className="badge badge-white mb-4">Experiencias Seleccionadas</div>
+          <h1 className="hero-title">Nuestros Paquetes de Viaje</h1>
           <p className="hero-subtitle mx-auto">
-            Discover our hand-picked itineraries. From weekend getaways to month-long adventures, everything is planned for you.
+            Descubre nuestros itinerarios cuidadosamente seleccionados. Desde escapadas de fin de semana hasta aventuras de un mes, todo está planeado para ti.
           </p>
         </div>
       </div>
@@ -140,7 +226,7 @@ export default function TourPackagesPage() {
               <div className="package-img">
                 <img src={pkg.image || `/images/${pkg.image}.png`} alt={pkg.name} />
                 <div className="package-duration">
-                  <Calendar size={14} /> {pkg.duration} Days
+                  <Calendar size={14} /> {pkg.duration} días
                 </div>
               </div>
               <div className="package-content">
@@ -166,7 +252,7 @@ export default function TourPackagesPage() {
                     className="btn btn-primary"
                     onClick={() => setSelectedPackageId(pkg.id)}
                   >
-                    View Itinerary
+                    Ver Itinerario
                   </button>
                 </div>
               </div>

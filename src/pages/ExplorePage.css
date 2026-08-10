@@ -423,6 +423,63 @@
   font-weight: 600;
 }
 
+/* ─── Navigation History Stack ─── */
+.history-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast);
+}
+
+.history-item:hover {
+  background: var(--border-default);
+}
+
+.history-item:first-child {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-light);
+}
+
+.history-index {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: white;
+  padding: 2px 6px;
+  border-radius: 12px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.history-item:first-child .history-index {
+  color: var(--accent);
+}
+
+.history-name {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.empty-history {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 8px 0;
+}
+
 /* ─── Responsive ─── */
 @media (max-width: 992px) {
   .explore-layout {

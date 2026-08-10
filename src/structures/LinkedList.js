@@ -1,119 +1,211 @@
 /**
- * LinkedList — Lista Enlazada Simple
- * Propósito: Itinerario del viaje. Cada nodo = una parada.
+ * ListaEnlazada — Singly Linked List (Lista Enlazada Simple)
+ * Propósito: Almacenar y administrar paquetes turísticos guardados.
+ *
+ * Estructura:
+ *   Nodo { valor, siguiente }
+ *   ListaEnlazada { cabeza }
+ *
+ * Operaciones académicas:
+ *   agregar(valor)     → inserta nuevo Nodo al final
+ *   buscar(id)         → recorre desde cabeza con siguiente
+ *   modificar(id, ...) → actualiza actual.valor directamente
+ *   eliminar(id)       → religa referencias siguiente
+ *   recorrer()         → traversal completo desde cabeza
  */
-export class ListNode {
-  constructor(data) { this.data = data; this.next = null; }
+
+export class Nodo {
+  constructor(valor) {
+    this.valor = valor;       // datos del paquete / reserva
+    this.siguiente = null;    // referencia al siguiente nodo
+  }
 }
 
-export class LinkedList {
-  constructor() { this.head = null; this._size = 0; }
-
-  append(data) {
-    const newNode = new ListNode(data);
-    if (this.head === null) { this.head = newNode; }
-    else { let c = this.head; while (c.next !== null) c = c.next; c.next = newNode; }
-    this._size++;
-    return newNode;
+export class ListaEnlazada {
+  constructor() {
+    this.cabeza = null;       // primer nodo de la lista
+    this._tamanio = 0;
   }
 
-  prepend(data) {
-    const newNode = new ListNode(data);
-    newNode.next = this.head;
-    this.head = newNode;
-    this._size++;
-    return newNode;
-  }
-
-  insertAt(index, data) {
-    if (index < 0 || index > this._size) throw new RangeError(`Index ${index} out of bounds for size ${this._size}`);
-    if (index === 0) return this.prepend(data);
-    const newNode = new ListNode(data);
-    let current = this.head;
-    for (let i = 0; i < index - 1; i++) current = current.next;
-    newNode.next = current.next;
-    current.next = newNode;
-    this._size++;
-    return newNode;
-  }
-
-  removeAt(index) {
-    this._validateIndex(index);
-    let removed;
-    if (index === 0) { removed = this.head.data; this.head = this.head.next; }
-    else {
-      let current = this.head;
-      for (let i = 0; i < index - 1; i++) current = current.next;
-      removed = current.next.data;
-      current.next = current.next.next;
+  // ─── AGREGAR ─────────────────────────────────────────────
+  // Crea un nuevo Nodo y lo agrega al final de la lista.
+  agregar(valor) {
+    const nuevoNodo = new Nodo(valor);
+    if (this.cabeza === null) {
+      this.cabeza = nuevoNodo;
+    } else {
+      let actual = this.cabeza;
+      while (actual.siguiente !== null) {
+        actual = actual.siguiente;
+      }
+      actual.siguiente = nuevoNodo;
     }
-    this._size--;
-    return removed;
+    this._tamanio++;
+    return nuevoNodo;
   }
 
-  removeBy(predicate) {
-    if (this.head === null) return null;
-    if (predicate(this.head.data)) { const r = this.head.data; this.head = this.head.next; this._size--; return r; }
-    let current = this.head;
-    while (current.next !== null) {
-      if (predicate(current.next.data)) { const r = current.next.data; current.next = current.next.next; this._size--; return r; }
-      current = current.next;
+  // ─── BUSCAR ──────────────────────────────────────────────
+  // Recorre desde cabeza usando siguiente. Retorna el NODO completo.
+  buscar(id) {
+    let actual = this.cabeza;
+    while (actual !== null) {
+      if (actual.valor.id === id) return actual;
+      actual = actual.siguiente;
     }
     return null;
   }
 
-  getAt(index) {
-    this._validateIndex(index);
-    let current = this.head;
-    for (let i = 0; i < index; i++) current = current.next;
-    return current.data;
+  // Búsqueda por texto (nombre del paquete o ciudades)
+  buscarPorTexto(texto) {
+    const textoBuscar = texto.toLowerCase();
+    const resultados = [];
+    let actual = this.cabeza;
+    while (actual !== null) {
+      const nombre = (actual.valor.name || '').toLowerCase();
+      const destinos = (actual.valor.cities || []).join(' ').toLowerCase();
+      if (nombre.includes(textoBuscar) || destinos.includes(textoBuscar)) {
+        resultados.push(actual.valor);
+      }
+      actual = actual.siguiente;
+    }
+    return resultados;
   }
 
-  find(predicate) {
-    let current = this.head;
-    while (current !== null) { if (predicate(current.data)) return current.data; current = current.next; }
+  // ─── MODIFICAR ───────────────────────────────────────────
+  // Localiza el nodo por id y modifica actual.valor.* directamente.
+  // El nodo y sus referencias siguiente permanecen intactos.
+  modificar(id, adultos, ninos) {
+    const nodo = this.buscar(id);
+    if (!nodo) return { exito: false, mensaje: 'Paquete no encontrado.' };
+
+    const totalPersonas = adultos + ninos;
+    const capacidadMaxima = nodo.valor.capacidadMaxima || 99;
+
+    if (totalPersonas > capacidadMaxima) {
+      return {
+        exito: false,
+        mensaje: `The selected number of travelers (${totalPersonas}) exceeds the maximum capacity of this package (${capacidadMaxima}).`
+      };
+    }
+
+    // Modificar directamente el valor del nodo existente
+    const precioAdulto = nodo.valor.precioAdulto || nodo.valor.price || 0;
+    const precioNino = nodo.valor.precioNino || Math.round(precioAdulto * 0.7);
+    nodo.valor.adultos = adultos;
+    nodo.valor.ninos = ninos;
+    nodo.valor.total = (adultos * precioAdulto) + (ninos * precioNino);
+
+    return { exito: true };
+  }
+
+  // ─── ELIMINAR ────────────────────────────────────────────
+  // Religa la referencia siguiente del nodo anterior.
+  // Actualiza cabeza si el nodo a eliminar es el primero.
+  eliminar(id) {
+    if (this.cabeza === null) return false;
+
+    if (this.cabeza.valor.id === id) {
+      this.cabeza = this.cabeza.siguiente;
+      this._tamanio--;
+      return true;
+    }
+
+    let actual = this.cabeza;
+    while (actual.siguiente !== null) {
+      if (actual.siguiente.valor.id === id) {
+        actual.siguiente = actual.siguiente.siguiente; // religar
+        this._tamanio--;
+        return true;
+      }
+      actual = actual.siguiente;
+    }
+    return false;
+  }
+
+  // ─── RECORRER ────────────────────────────────────────────
+  // Traversal completo desde cabeza hasta el fin.
+  // Devuelve array de valores para renderizar la interfaz.
+  recorrer() {
+    const resultado = [];
+    let actual = this.cabeza;
+    while (actual !== null) {
+      resultado.push(actual.valor);
+      actual = actual.siguiente;
+    }
+    return resultado;
+  }
+
+  // Recorrer retornando nodos completos (para visualización de estructura)
+  recorrerNodos() {
+    const nodos = [];
+    let actual = this.cabeza;
+    while (actual !== null) {
+      nodos.push(actual);
+      actual = actual.siguiente;
+    }
+    return nodos;
+  }
+
+  // ─── Utilidades ──────────────────────────────────────────
+  tamanio() { return this._tamanio; }
+  estaVacia() { return this._tamanio === 0; }
+
+  // ─── Aliases de compatibilidad con el resto del proyecto ─
+  size() { return this._tamanio; }
+  isEmpty() { return this._tamanio === 0; }
+  append(valor) { return this.agregar(valor); }
+  prepend(valor) {
+    const nuevoNodo = new Nodo(valor);
+    nuevoNodo.siguiente = this.cabeza;
+    this.cabeza = nuevoNodo;
+    this._tamanio++;
+    return nuevoNodo;
+  }
+  find(predicado) {
+    let actual = this.cabeza;
+    while (actual !== null) {
+      if (predicado(actual.valor)) return actual.valor;
+      actual = actual.siguiente;
+    }
     return null;
   }
-
-  findIndex(predicate) {
-    let current = this.head; let index = 0;
-    while (current !== null) { if (predicate(current.data)) return index; current = current.next; index++; }
-    return -1;
+  removeBy(predicado) {
+    if (this.cabeza === null) return null;
+    if (predicado(this.cabeza.valor)) {
+      const r = this.cabeza.valor;
+      this.cabeza = this.cabeza.siguiente;
+      this._tamanio--;
+      return r;
+    }
+    let actual = this.cabeza;
+    while (actual.siguiente !== null) {
+      if (predicado(actual.siguiente.valor)) {
+        const r = actual.siguiente.valor;
+        actual.siguiente = actual.siguiente.siguiente;
+        this._tamanio--;
+        return r;
+      }
+      actual = actual.siguiente;
+    }
+    return null;
   }
-
-  moveNode(fromIndex, toIndex) {
-    if (fromIndex === toIndex) return;
-    this._validateIndex(fromIndex); this._validateIndex(toIndex);
-    const data = this.removeAt(fromIndex);
-    this.insertAt(toIndex, data);
-  }
-
-  updateAt(index, newData, merge = false) {
-    this._validateIndex(index);
-    let current = this.head;
-    for (let i = 0; i < index; i++) current = current.next;
-    if (merge && typeof current.data === 'object' && typeof newData === 'object') {
-      current.data = { ...current.data, ...newData };
-    } else { current.data = newData; }
-  }
-
-  size() { return this._size; }
-  isEmpty() { return this._size === 0; }
-
+  toArray() { return this.recorrer(); }
+  clear() { this.cabeza = null; this._tamanio = 0; }
   forEach(callback) {
-    let current = this.head; let index = 0;
-    while (current !== null) { callback(current.data, index); current = current.next; index++; }
+    let actual = this.cabeza; let index = 0;
+    while (actual !== null) { callback(actual.valor, index); actual = actual.siguiente; index++; }
   }
-
-  toArray() {
-    const result = []; let current = this.head;
-    while (current !== null) { result.push(current.data); current = current.next; }
-    return result;
+  getAt(index) {
+    let actual = this.cabeza;
+    for (let i = 0; i < index; i++) {
+      if (!actual) throw new RangeError(`Index ${index} out of bounds`);
+      actual = actual.siguiente;
+    }
+    return actual ? actual.valor : null;
   }
-
-  clear() { this.head = null; this._size = 0; }
-
-  _validateIndex(index) {
-    if (index < 0 || index >= this._size) throw new RangeError(`Index ${index} out of bounds for size ${this._size}`);
-  }
+  get head() { return this.cabeza ? { data: this.cabeza.valor, next: this.cabeza.siguiente } : null; }
 }
+
+// Aliases para compatibilidad con imports existentes en el proyecto
+export const LinkedList = ListaEnlazada;
+export const ListNode = Nodo;

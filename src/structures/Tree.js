@@ -42,6 +42,17 @@ export class Tree {
 
   traverseDFS(callback) { this._dfs(this.root, callback, 0); }
 
+  traverseFrom(key, callback) {
+    const node = this.find(key);
+    if (node) this._dfs(node, callback, 0);
+  }
+
+  getParent(key) {
+    const path = this.getPath(key);
+    if (path.length >= 2) return path[path.length - 2];
+    return null;
+  }
+
   traverseBFS(callback) {
     const queue = [[this.root, 0]]; let front = 0;
     while (front < queue.length) {
