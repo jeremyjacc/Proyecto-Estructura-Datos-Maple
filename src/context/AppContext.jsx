@@ -6,7 +6,7 @@ import { Stack } from '../structures/Stack.js';
 import { Queue } from '../structures/Queue.js';
 import { Tree } from '../structures/Tree.js';
 import { Graph } from '../structures/Graph.js';
-
+// BASE DE DATOS DE MEMORIA QUE QUEDA GUARDADA MIENTRAS SE INTERACTÚA.
 const AppContext = createContext();
 
 export function AppProvider({ children }) {
@@ -16,7 +16,7 @@ export function AppProvider({ children }) {
   const [cities, setCities] = useState([]);
   const [continents, setContinents] = useState([]);
   const [tourPackages, setTourPackages] = useState([]);
-  
+
   // Estado de carga y errores
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -24,13 +24,13 @@ export function AppProvider({ children }) {
   // Estructuras de datos dinámicas para el usuario
   // 1. Array Dinámico: Mis viajes guardados (Travel Boards custom)
   const [boards, setBoards] = useState(new DynamicArray());
-  
+
   // 2. LinkedList: Paquetes turísticos guardados
   const [savedPackages, setSavedPackages] = useState(new LinkedList());
-  
+
   // 3. Stack: Historial de navegación de ciudades
   const [navigationHistory, setNavigationHistory] = useState(new Stack());
-  
+
   // 4. Queue: Cola de recorrido para un Tour Package activo
   const [activeTourQueue, setActiveTourQueue] = useState(new Queue());
 
@@ -48,7 +48,7 @@ export function AppProvider({ children }) {
         setCities(data.allCities);
         setContinents(data.continents);
         setTourPackages(data.tourPackages);
-        
+
         // Cargar datos del usuario desde localStorage
         loadUserData();
       } catch (err) {
@@ -58,7 +58,7 @@ export function AppProvider({ children }) {
         setLoading(false);
       }
     }
-    
+
     initData();
   }, []);
 
@@ -79,8 +79,8 @@ export function AppProvider({ children }) {
 
           const restoredPending = new Queue();
           if (b.pendingCities && Array.isArray(b.pendingCities._items)) {
-            b.pendingCities._items.forEach(item => { 
-              if (item !== null && item !== undefined) restoredPending.enqueue(item); 
+            b.pendingCities._items.forEach(item => {
+              if (item !== null && item !== undefined) restoredPending.enqueue(item);
             });
           }
           b.pendingCities = restoredPending;
@@ -128,17 +128,17 @@ export function AppProvider({ children }) {
       description,
       theme,
       createdAt: new Date().toISOString(),
-      cities: new LinkedList(), 
-      pendingCities: new Queue(), 
-      actionHistory: new Stack() 
+      cities: new LinkedList(),
+      pendingCities: new Queue(),
+      actionHistory: new Stack()
     };
-    
+
     const newBoards = new DynamicArray();
     for (let i = 0; i < boards.size(); i++) {
       newBoards.push(boards.get(i));
     }
     newBoards.push(newBoard);
-    
+
     setBoards(newBoards);
     saveBoardsToStorage(newBoards);
     return newBoard;
@@ -150,7 +150,7 @@ export function AppProvider({ children }) {
     for (let i = 0; i < boards.size(); i++) {
       newBoards.push(boards.get(i));
     }
-    
+
     const boardToUpdate = newBoards.get(index);
     if (boardToUpdate) {
       newBoards.set(index, {
@@ -171,7 +171,7 @@ export function AppProvider({ children }) {
     for (let i = 0; i < boards.size(); i++) {
       newBoards.push(boards.get(i));
     }
-    
+
     try {
       newBoards.removeAt(index);
       setBoards(newBoards);
@@ -185,7 +185,7 @@ export function AppProvider({ children }) {
   const addCityToBoard = (boardId, cityKey) => {
     let updated = false;
     const newBoards = new DynamicArray();
-    
+
     for (let i = 0; i < boards.size(); i++) {
       const board = boards.get(i);
       if (board.id === boardId) {
@@ -198,7 +198,7 @@ export function AppProvider({ children }) {
       }
       newBoards.push(board);
     }
-    
+
     if (updated) {
       setBoards(newBoards);
       saveBoardsToStorage(newBoards);
@@ -210,7 +210,7 @@ export function AppProvider({ children }) {
   const savePackage = (pkg) => {
     const newList = new LinkedList();
     savedPackages.toArray().forEach(p => newList.append(p));
-    
+
     // Evitar duplicados
     const exists = newList.toArray().some(p => p.id === pkg.id);
     if (!exists) {
@@ -275,7 +275,7 @@ export function AppProvider({ children }) {
       newStack.push(tempArray[i]);
       navigationHistory.push(tempArray[i]); // Restaurar el original por si acaso
     }
-    
+
     // Evitar apilar la misma ciudad consecutivamente
     if (newStack.isEmpty() || newStack.peek() !== cityKey) {
       newStack.push(cityKey);
@@ -285,24 +285,24 @@ export function AppProvider({ children }) {
 
   const popFromHistory = () => {
     if (navigationHistory.isEmpty()) return null;
-    
+
     const newStack = new Stack();
     const tempArray = [];
     while (!navigationHistory.isEmpty()) {
       tempArray.push(navigationHistory.pop());
     }
-    
+
     // El elemento a descartar (ciudad actual)
     const current = tempArray[0];
-    
+
     // El elemento anterior (al que queremos ir)
     const previous = tempArray.length > 1 ? tempArray[1] : null;
-    
+
     // Reconstruir el stack sin el elemento actual
     for (let i = tempArray.length - 1; i > 0; i--) {
       newStack.push(tempArray[i]);
     }
-    
+
     setNavigationHistory(newStack);
     return previous;
   };
@@ -321,7 +321,7 @@ export function AppProvider({ children }) {
     userGraph.getAllNodes().forEach(n => {
       n.edges.forEach(e => {
         if (!newGraph.hasEdge(n.key, e.node)) {
-          try { newGraph.addEdge(n.key, e.node, { distance: e.distance, cost: e.cost }); } catch {}
+          try { newGraph.addEdge(n.key, e.node, { distance: e.distance, cost: e.cost }); } catch { }
         }
       });
     });
@@ -339,7 +339,7 @@ export function AppProvider({ children }) {
       if (n.key !== key) {
         n.edges.forEach(e => {
           if (e.node !== key && !newGraph.hasEdge(n.key, e.node)) {
-            try { newGraph.addEdge(n.key, e.node, { distance: n.edges.find(ed => ed.node === e.node)?.distance || 0, cost: n.edges.find(ed => ed.node === e.node)?.cost || 0 }); } catch {}
+            try { newGraph.addEdge(n.key, e.node, { distance: n.edges.find(ed => ed.node === e.node)?.distance || 0, cost: n.edges.find(ed => ed.node === e.node)?.cost || 0 }); } catch { }
           }
         });
       }
@@ -355,7 +355,7 @@ export function AppProvider({ children }) {
     userGraph.getAllNodes().forEach(n => {
       n.edges.forEach(e => {
         if (!newGraph.hasEdge(n.key, e.node)) {
-          try { newGraph.addEdge(n.key, e.node, { distance: e.distance, cost: e.cost }); } catch {}
+          try { newGraph.addEdge(n.key, e.node, { distance: e.distance, cost: e.cost }); } catch { }
         }
       });
     });
@@ -371,7 +371,7 @@ export function AppProvider({ children }) {
       n.edges.forEach(e => {
         if (!((n.key === key1 && e.node === key2) || (n.key === key2 && e.node === key1))) {
           if (!newGraph.hasEdge(n.key, e.node)) {
-            try { newGraph.addEdge(n.key, e.node, { distance: e.distance, cost: e.cost }); } catch {}
+            try { newGraph.addEdge(n.key, e.node, { distance: e.distance, cost: e.cost }); } catch { }
           }
         }
       });
@@ -390,14 +390,14 @@ export function AppProvider({ children }) {
 
   const nextTourCity = () => {
     if (activeTourQueue.isEmpty()) return null;
-    
+
     const newQueue = new Queue();
     const current = activeTourQueue.dequeue();
-    
+
     while (!activeTourQueue.isEmpty()) {
       newQueue.enqueue(activeTourQueue.dequeue());
     }
-    
+
     setActiveTourQueue(newQueue);
     return current;
   };
@@ -415,27 +415,27 @@ export function AppProvider({ children }) {
     tourPackages,
     loading,
     error,
-    
+
     // Travel Boards
     boards,
     createBoard,
     updateBoard,
     deleteBoard,
     addCityToBoard,
-    
+
     // Saved Packages
     savedPackages,
     savePackage,
     removeSavedPackage,
     buscarPaquete,
     modificarPaquete,
-    
+
     // Navigation History
     navigationHistory,
     pushToHistory,
     popFromHistory,
     clearHistory,
-    
+
     // Active Tour
     activeTourQueue,
     startTour,
