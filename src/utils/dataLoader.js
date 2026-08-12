@@ -3,6 +3,10 @@
  *
  * Conecta los datos estáticos con nuestras estructuras manuales.
  * Se ejecuta una vez al iniciar la app.
+ * contiene la lógica para tomar ese texto plano de los JSON,
+ *  transformarlo mágicamente en complejas Estructuras de Datos
+ *  (Árboles y Grafos), y entregárselo a tu aplicación
+ * justo cuando el usuario entra a la página web
  */
 import { Tree } from '../structures/Tree.js';
 import { Graph } from '../structures/Graph.js';
