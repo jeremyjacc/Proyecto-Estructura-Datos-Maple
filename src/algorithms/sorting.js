@@ -19,7 +19,7 @@ function merge(left, right, comparator) {
 }
 
 /**
- * Merge Sort (Ordenamiento por Mezcla) - Complejidad: O(n log n)
+ * Merge Sort (Ordenamiento por Mezcla) - Complejidad: O(n log n) -EL CUASI LINEAL
  * Lógica: "Divide y Vencerás". Parte el arreglo en mitades hasta tener elementos individuales, 
  * luego los vuelve a juntar (merge) en orden.
  * Es ESTABLE (respeta el orden original si dos valores son iguales).
@@ -27,11 +27,11 @@ function merge(left, right, comparator) {
  */
 export function mergeSort(array, comparator = defaultComparator) {
   if (array.length <= 1) return [...array];
-  
+
   const comp = typeof comparator === 'string'
     ? (a, b) => { if (a[comparator] < b[comparator]) return -1; if (a[comparator] > b[comparator]) return 1; return 0; }
     : comparator;
-    
+
   const mid = Math.floor(array.length / 2);
   const sortedLeft = mergeSort(array.slice(0, mid), comp);
   const sortedRight = mergeSort(array.slice(mid), comp);
@@ -47,11 +47,11 @@ export function mergeSort(array, comparator = defaultComparator) {
  */
 export function quickSort(array, comparator = defaultComparator) {
   if (array.length <= 1) return [...array];
-  
+
   const comp = typeof comparator === 'string'
     ? (a, b) => { if (a[comparator] < b[comparator]) return -1; if (a[comparator] > b[comparator]) return 1; return 0; }
     : comparator;
-    
+
   const pivot = array[Math.floor(array.length / 2)];
   const less = []; const equal = []; const greater = [];
   for (let i = 0; i < array.length; i++) {
