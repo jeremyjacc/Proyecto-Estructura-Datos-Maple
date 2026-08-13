@@ -4,7 +4,7 @@ Bienvenido al repositorio del proyecto final para la asignatura de **Estructura 
 
 ---
 
-## 🛠️ Cómo ejecutar el programa (Manual de Usuario)
+##  Cómo ejecutar el programa (Manual de Usuario)
 
 Para correr este proyecto en tu computadora, necesitas tener instalado **Node.js**.
 
