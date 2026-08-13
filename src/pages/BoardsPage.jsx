@@ -61,7 +61,7 @@ const COUNTRY_CODES = {
   'Australia': 'AU'
 };
 
-// ─── Direct Flights Network ────────────────────────────────────────────────────────
+// ─── Direct Flights Network AQUI SE DIBUJAN LOS GRAFOS ────────────────────────────────────────────────────
 function DirectFlightsNetwork({ graph, cities }) {
   const [cityToSelect, setCityToSelect] = useState('');
   const [addedCities, setAddedCities] = useState([]);
@@ -87,7 +87,7 @@ function DirectFlightsNetwork({ graph, cities }) {
   // Calcula aristas reales existentes en el grafo entre las ciudades agregadas
   const edgesToDraw = [];
   const seenEdges = new Set();
-  
+
   addedCities.forEach(cityKey => {
     const node = graph.getNode(cityKey);
     if (node) {
@@ -109,9 +109,9 @@ function DirectFlightsNetwork({ graph, cities }) {
     <div className="graph-builder" style={{ minHeight: '400px', display: 'flex', flexDirection: 'column', background: 'var(--bg-secondary)', borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-subtle)', overflow: 'hidden' }}>
       <div className="graph-toolbar" style={{ padding: '20px', borderBottom: '1px solid var(--border-subtle)', display: 'flex', justifyContent: 'center', gap: '12px', flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <select 
-            className="select-input" 
-            value={cityToSelect} 
+          <select
+            className="select-input"
+            value={cityToSelect}
             onChange={(e) => setCityToSelect(e.target.value)}
             style={{ minWidth: '220px', padding: '8px 12px', fontSize: '1rem', borderRadius: 'var(--radius-md)' }}
           >
@@ -148,14 +148,14 @@ function DirectFlightsNetwork({ graph, cities }) {
                 const total = addedCities.length;
                 const iFrom = addedCities.indexOf(edge.from);
                 const iTo = addedCities.indexOf(edge.to);
-                
+
                 const angleFrom = (2 * Math.PI * iFrom) / Math.max(total, 1) - Math.PI / 2;
                 const angleTo = (2 * Math.PI * iTo) / Math.max(total, 1) - Math.PI / 2;
-                
+
                 const radius = total === 1 ? 0 : 160;
 
                 return (
-                  <line 
+                  <line
                     key={`edge-${i}`}
                     x1={`calc(50% + ${Math.cos(angleFrom) * radius}px)`}
                     y1={`calc(50% + ${Math.sin(angleFrom) * radius}px)`}
@@ -168,7 +168,7 @@ function DirectFlightsNetwork({ graph, cities }) {
                 );
               })}
             </svg>
-            
+
             {/* Nodos (Ciudades) */}
             {addedCities.map((cityKey, i) => {
               const total = addedCities.length;
@@ -177,7 +177,7 @@ function DirectFlightsNetwork({ graph, cities }) {
 
               return (
                 <div key={cityKey} style={{
-                  position: 'absolute', top: '50%', left: '50%', 
+                  position: 'absolute', top: '50%', left: '50%',
                   transform: `translate(calc(-50% + ${Math.cos(angle) * radius}px), calc(-50% + ${Math.sin(angle) * radius}px))`,
                   width: '64px', height: '64px', borderRadius: '50%',
                   background: 'var(--accent)', border: '4px solid var(--bg-primary)',
@@ -238,7 +238,7 @@ export default function BoardsPage() {
   const handleFulfillRequirement = () => {
     if (!checkoutQueue || checkoutQueue.isEmpty()) return;
     checkoutQueue.dequeue();
-    
+
     if (checkoutQueue.isEmpty()) {
       setTicket({
         id: `TKT-${Math.random().toString(36).substr(2, 6).toUpperCase()}`,
@@ -277,7 +277,7 @@ export default function BoardsPage() {
       setIsModalOpen(true);
     }
   };
-  
+
   const handleOpenNewBoard = () => {
     setEditingBoardIndex(null);
     setNewBoardName('');
@@ -354,12 +354,12 @@ export default function BoardsPage() {
                 <div key={board.id} className="board-card glass">
                   <div className="board-header">
                     <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ 
-                        background: 'var(--accent)', color: 'white', padding: '2px 6px', 
-                        borderRadius: '4px', fontSize: '0.8rem', fontWeight: 'bold' 
+                      <span style={{
+                        background: 'var(--accent)', color: 'white', padding: '2px 6px',
+                        borderRadius: '4px', fontSize: '0.8rem', fontWeight: 'bold'
                       }}>
                         [{index}]
-                      </span> 
+                      </span>
                       {board.name}
                     </h3>
                     <div style={{ display: 'flex', gap: '8px' }}>
@@ -368,7 +368,7 @@ export default function BoardsPage() {
                     </div>
                   </div>
                   <p className="board-desc">{board.description || 'Sin descripción'}</p>
-                  
+
                   {board.cities.size && board.cities.size() > 0 ? (
                     <ul style={{ margin: '0 0 20px 0', padding: '0 0 0 24px', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
                       {board.cities.toArray().map((c, i) => {
@@ -382,7 +382,7 @@ export default function BoardsPage() {
 
                   <div className="board-footer">
                     <div className="board-meta"><MapPin size={14} /><span>{board.cities.size ? board.cities.size() : 0} ciudades</span></div>
-                    <button 
+                    <button
                       className="btn btn-secondary btn-sm"
                       onClick={() => setViewBoard(board)}
                     >
@@ -561,7 +561,7 @@ export default function BoardsPage() {
                   </div>
 
                   <div className="d-flex gap-2">
-                    <button 
+                    <button
                       className="btn btn-accent flex-1"
                       onClick={() => handleBuyPackage(currentPkg)}
                       style={{ padding: '12px', flex: 1, textAlign: 'center', justifyContent: 'center' }}
@@ -689,7 +689,7 @@ export default function BoardsPage() {
                   {viewBoard.cities.size ? viewBoard.cities.size() : 0} destinations in this trip
                 </strong>
               </div>
-              
+
               {viewBoard.cities.size && viewBoard.cities.size() > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   {viewBoard.cities.recorrer().map((cityKey, idx) => {
@@ -757,14 +757,14 @@ export default function BoardsPage() {
               ) : (
                 <div className="checkout-queue-process">
                   <p className="mb-4 text-muted">Por favor completa los siguientes requisitos obligatorios.</p>
-                  
+
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginBottom: '24px' }}>
-                    
+
                     {checkoutQueue.toArray().map((req, i) => {
                       const isFront = i === 0;
                       return (
-                        <div key={req.id} className={`glass d-flex align-center justify-between p-3`} style={{ 
-                          borderRadius: 'var(--radius-md)', 
+                        <div key={req.id} className={`glass d-flex align-center justify-between p-3`} style={{
+                          borderRadius: 'var(--radius-md)',
                           border: isFront ? '2px solid var(--accent)' : '1px solid var(--border-subtle)',
                           opacity: isFront ? 1 : 0.6,
                           background: isFront ? 'var(--bg-secondary)' : 'var(--bg-tertiary)'
@@ -777,7 +777,7 @@ export default function BoardsPage() {
                       );
                     })}
                   </div>
-                  
+
                   <div className="d-flex justify-between align-center" style={{ background: 'var(--bg-secondary)', padding: '16px', borderRadius: 'var(--radius-lg)' }}>
                     <span className="text-sm font-bold text-muted">Requisito {5 - checkoutQueue.size()} de 4</span>
                     <button className="btn btn-accent" onClick={handleFulfillRequirement}>
