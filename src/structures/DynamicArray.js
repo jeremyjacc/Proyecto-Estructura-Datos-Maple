@@ -44,7 +44,8 @@ export class DynamicArray {
 
   /**
    * Inserción en cualquier posición (insertAt)
-   * Complejidad: O(n) - Lento porque requiere desplazar los elementos hacia la derecha para hacer espacio.
+   * Complejidad: O(n) - Lento porque requiere desplazar los elementos
+   *  hacia la derecha para hacer espacio.
    */
   insertAt(index, element) {
     if (index < 0 || index > this._size) throw new RangeError(`Index ${index} out of bounds for size ${this._size}`);
